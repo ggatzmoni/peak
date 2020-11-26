@@ -8,9 +8,12 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <link rel="stylesheet" href="styles/debug.css">
-
-  <div class="hero-body has-background-black">
-    <div class="container has-text-centered">
-      <img src="static/logo.png">
-    </div>
-  </div>
+<body>
+  <form action="/contact" method="POST">
+    <textarea type="text" name="msg"></textarea>
+    <label>Messege</label>
+    <button type="submit" class="button buttonBlue">
+    Submit
+    </button>
+  </form>
+</body>

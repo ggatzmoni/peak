@@ -1,6 +1,26 @@
 '''imports'''
 from flask import Flask, redirect, url_for, render_template, request
 from function import genre, decade, track, length, popularity
+from createplaylist import main
+from dotenv import load_dotenv
+import os
+load_dotenv()
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
+user_id = os.environ.get('user_id')
+authorization_token = os.environ.get('authorization_token')
+
+import spotipy
+#Authentication with Spotipy package
+from spotipy.oauth2 import SpotifyOAuth
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
+                                               client_secret=client_secret,
+                                               redirect_uri="https://example.com", #replace with our website url
+                                               scope="playlist-modify-public"))
+
+#Import classes from other files
+from spotifyclient import SpotifyClient
+from track import Track
 
 '''instance flask web application'''
 app = Flask(__name__)
@@ -24,9 +44,12 @@ def admin():
     return redirect(url_for("home"))
 
 #create player page
-@app.route("/player")
+@app.route("/player", methods=['POST','GET'])
 def player():
-    return render_template("page_player.html")
+    if request.main == 'POST':
+        msg = request.form.get('msg')
+        print(msg)
+    return render_template("player.html", main=main)
 
 @app.route("/v1")
 def v1():
