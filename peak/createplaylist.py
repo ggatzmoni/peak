@@ -24,6 +24,7 @@ from track import Track
 
 #Dataframe final
 df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
+df_kaggle['year'] = df_kaggle['year'].astype(str)
 
 
 #Will be replaced by preprocessing pipeline
@@ -72,7 +73,7 @@ def main():
     # Insert here the recommendation algorythm from Luam
 
     # (filtered_results will be replaced by the name of Luam's output dataframe)
-    filtered_duration = filtered_results[filtered_results['duration'].cumsum() <= query_duration]
+    filtered_duration = filtered_results[filtered_results['duration_min'].cumsum() <= query_duration]
     recommended_playlist = filtered_duration.reset_index(drop=True)
     recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
     print(recommended_tracks)
