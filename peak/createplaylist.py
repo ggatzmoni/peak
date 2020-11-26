@@ -1,17 +1,25 @@
 # -*- coding: UTF-8 -*-
 
-from spotifyclient import SpotifyClient
-from dotenv import load_dotenv   #for python-dotenv method
-load_dotenv()                    #for python-dotenv method
-
+from dotenv import load_dotenv
+load_dotenv()
 import os
+from spotifyclient import SpotifyClient
 import pandas as pd
-
+from track import Track
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 authorization_token = os.environ.get('authorization_token')
 user_id = os.environ.get('user_id')
+
 df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
+
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
+                                               client_secret=client_secret,
+                                               redirect_uri="https://example.com",
+                                               scope="playlist-modify-public"))
+
 
 def formatting(df):
     df['genres'] = df['genres'].astype(str)
@@ -38,6 +46,7 @@ def main():
 
 
     #Asking their preferences
+
     query_genre=input("Which genre?\n>")
     query_pop = input("Popularity? 0 and 100, with 100 being the most popular\n> ")
     query_decade = get_choice(data=formatting(df_kaggle), column="decades")
@@ -58,58 +67,29 @@ def main():
 
     filtered_duration = filtered_results[filtered_results['duration_min'].cumsum() <= query_duration]
     recommended_playlist = filtered_duration.reset_index(drop=True)
-    recommended_tracks = recommended_playlist['id'].tolist()
+    recommended_tracks = recommended_playlist[['name','id','artists']]
     print(recommended_tracks)
+    track_id = recommended_playlist['id'].tolist()
+    #tracks = [Track(recommended_tracks["name"], recommended_tracks["id"], recommended_tracks["artists"]) for
+                  #track in recommended_tracks]
+    #track_uris = [track.create_spotify_uri() for track in tracks]
+    #name, id, artists = recommended_tracks['name'],recommended_tracks['id'],recommended_tracks['artists']
+
+    #print(track_uris)
+
 
     # get playlist name from user and create playlist
     playlist_name = input("\nWhat's the playlist name? ")
+    playlist_name = str(playlist_name)
     playlist = spotify_client.create_playlist(playlist_name)
+    playlist_id =playlist.id
+
     print(f"\nPlaylist '{playlist.name}' was created successfully.")
 
     # populate playlist with recommended tracks
-    spotify_client.populate_playlist(playlist, recommended_tracks)
-    print(f"\nRecommended tracks successfully uploaded to playlist '{playlist.name}'.")
-
-
-if __name__ == "__main__":
-    main()
-from spotifyclient import SpotifyClient
-
-
-def main():
-    spotify_client = SpotifyClient(authorization_token,user_id)
-
-
-    #Asking their preferences
-    query_genre=input("Which genre?\n>")
-    query_pop = input("Popularity? 0 and 100, with 100 being the most popular\n> ")
-    query_decade = get_choice(data=df_kaggle, column="decades")
-    query_duration = input("Duration of the playlist?\n> ")
-    print(f" You selected {query_genre} tracks with a popularity of {query_pop}% from the {query_decade} decade for a total duration of {query_duration} minutes")
-
-    #Converting to the right type
-    query_pop = int(query_pop)
-    query_duration = int(query_duration)
-    query_decade = str(query_decade)
-    query_genre = str(query_genre)
-
-    #filtering the dataset accordingly
-    filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(query_genre)]
-    filtered_results = filtered_genre[(filtered_genre['year'].str.contains(query_decade[1:3])) & (filtered_genre['popularity'] == query_pop)]
-    filtered_duration = filtered_results[filtered_results['duration_min'].cumsum() <= query_duration]
-    recommended_playlist = filtered_duration.reset_index(drop=True)
-    recommended_tracks = recommended_playlist['id'].tolist()
-    print(recommended_tracks)
-
-    # get playlist name from user and create playlist
-    playlist_name = input("\nWhat's the playlist name? ")
-    playlist = spotify_client.create_playlist(playlist_name)
-    print(f"\nPlaylist '{playlist.name}' was created successfully.")
-
-    # populate playlist with recommended tracks
-    spotify_client.populate_playlist(playlist, recommended_tracks)
-    print(f"\nRecommended tracks successfully uploaded to playlist '{playlist.name}'.")
-
+    #spotify_client.populate_playlist(playlist,tracks)
+    sp.playlist_add_items(playlist_id, track_id, position=None)
+    print(f"\nRecommended tracks successfully uploaded to playlist '{playlist_name}'.")
 
 if __name__ == "__main__":
     main()

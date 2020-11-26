@@ -1,10 +1,18 @@
 import json
 import requests
-from dotenv import load_dotenv   #for python-dotenv method
-load_dotenv()                    #for python-dotenv method
-
+import pandas as pd
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
+authorization_token = os.environ.get('authorization_token')
+user_id = os.environ.get('user_id')
+df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
+
+from track import Track
+from playlist import Playlist
 
 class SpotifyClient:
     """SpotifyClient performs operations using the Spotify API."""
@@ -19,27 +27,31 @@ class SpotifyClient:
 
 
 
-
-    def create_playlist(self, playlist_name):
+    def create_playlist(self, name):
         """
         :param name (str): New playlist name
         :return playlist (Playlist): Newly created playlist
         """
-        data = json.dumps({
-            "name": playlist_name,
-            "description": "Recommended songs",
+        response = requests.post(
+            f"https://api.spotify.com/v1/users/{self._user_id}/playlists",
+            json.dumps({
+            "name": name,
+            "description": "Recommended songs by Peak",
             "public": True
-        })
-        url = f"https://api.spotify.com/v1/users/{self._user_id}/playlists"
-        response = self._place_post_api_request(url, data)
+        }),
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {authorization_token}"
+            }
+        )
         response_json = response.json()
 
         # create playlist
         playlist_id = response_json["id"]
-        playlist = Playlist(playlist_name, playlist_id)
+        playlist = Playlist(name, playlist_id)
         return playlist
 
-    def populate_playlist(self, playlist, tracks):
+    '''def populate_playlist(self, playlist, tracks):
         """Add tracks to a playlist.
         :param playlist (Playlist): Playlist to which to add tracks
         :param tracks (list of Track): Tracks to be added to playlist
@@ -50,7 +62,7 @@ class SpotifyClient:
         url = f"https://api.spotify.com/v1/playlists/{playlist.id}/tracks"
         response = self._place_post_api_request(url, data)
         response_json = response.json()
-        return response_json
+        return response_json'''
 
     def _place_get_api_request(self, url):
         response = requests.get(

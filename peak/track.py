@@ -1,7 +1,7 @@
 class Track:
     """Track represents a piece of music."""
 
-    def __init__(self, name, id, artist):
+    def __init__(self, name, id, artists):
         """
         :param name (str): Track name
         :param id (int): Spotify track id
@@ -9,10 +9,10 @@ class Track:
         """
         self.name = name
         self.id = id
-        self.artist = artist
+        self.artists = artists
 
     def create_spotify_uri(self):
         return f"spotify:track:{self.id}"
 
     def __str__(self):
-        return self.name + " by " + self.artist
+        return self.name + " by " + self.artists
