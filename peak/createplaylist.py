@@ -27,12 +27,12 @@ df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
 
 
 #Will be replaced by preprocessing pipeline
-def formatting(df):
+'''def formatting(df):
     df['genres'] = df['genres'].astype(str)
     df['duration_min'] = (df['duration_ms']/60000).astype(int)
     df['decades'] = pd.cut(x=df['year'], bins=[1920, 1930, 1940, 1950,1960,1970,1980,1990,2000,2010,2020])
     df['year'] = df['year'].astype(str)
-    return df
+    return df'''
 
 #Display user input as a list of choices
 def get_choice(df, column):
@@ -54,7 +54,7 @@ def main():
     #Asking users for their preferences
     query_genre=input("Which genre?\n>")
     query_pop = input("Popularity? 0 and 100, with 100 being the most popular\n> ")
-    query_decade = get_choice(df=formatting(df_kaggle), column="decades")
+    query_decade = get_choice(df=df_kaggle, column="decades")
     query_duration = input("Duration of the playlist?\n> ")
     print(f" You selected {query_genre} tracks with a popularity of {query_pop}% from the {query_decade} decade for a total duration of {query_duration} minutes")
 
@@ -72,9 +72,9 @@ def main():
     # Insert here the recommendation algorythm from Luam
 
     # (filtered_results will be replaced by the name of Luam's output dataframe)
-    filtered_duration = filtered_results[filtered_results['duration_min'].cumsum() <= query_duration]
+    filtered_duration = filtered_results[filtered_results['duration'].cumsum() <= query_duration]
     recommended_playlist = filtered_duration.reset_index(drop=True)
-    recommended_tracks = recommended_playlist[['name','id','artists']]
+    recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
     print(recommended_tracks)
 
 
@@ -86,8 +86,8 @@ def main():
     print(f"\nPlaylist '{playlist.name}' was created successfully.")
 
     # populate playlist with recommended tracks
-    track_id = recommended_playlist['id'].tolist()
-    sp.playlist_add_items(playlist_id, track_id, position=None)
+    tracks_id = recommended_playlist['track_id'].tolist()
+    sp.playlist_add_items(playlist_id, tracks_id, position=None)
     print(f"\nRecommended tracks successfully uploaded to playlist '{playlist_name}'.")
 
 if __name__ == "__main__":
