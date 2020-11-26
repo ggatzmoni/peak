@@ -59,6 +59,16 @@ def v4():
     popularities = popularity()
     return render_template("v4.html", genres=genres, decades=decades, tracks = tracks, lengths = lengths, popularities = popularities)
 
+
+@app.route("/center", methods=["POST","GET"])
+def center():
+    genres = genre()
+    decades = decade()
+    tracks = track()
+    lengths = length()
+    popularities = popularity()
+    return render_template("center.html", genres=genres, decades=decades, tracks = tracks, lengths = lengths, popularities = popularities)
+
 @app.route("/algo_input", methods=["POST","GET"])
 def inp():
     if request.method == "POST":
