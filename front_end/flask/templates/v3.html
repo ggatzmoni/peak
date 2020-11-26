@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Peak!</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <link rel="stylesheet" href="styles/debug.css">
+  </head>
+<body>
+    <header class = "hero is-medium has-background-black">
+      <div class="hero-head is-right">
+        <figure class="image right">
+          <img src="static/logo.png" sty@le="top: 560px;">
+        </figure>
+      </div>
+    </header>
+    <!-- .section -->
+  <form action="/algo_input" method="POST">
+<section class="section has-background-black">
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5 bd-notification is-primary">
+                <div class="dropdown is-active">
+                    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                      <select class="select is-medium" name="genre" id="genre-select">
+                        <div class="dropdown-content">
+                        {% for genre in genres %}
+                          <option value="{{genre}}">{{genre.capitalize()}}</option>
+                        {% endfor %}
+                        </div>
+                      </select>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="section has-background-black">
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5 bd-notification is-primary">
+                <div class="dropdown is-active">
+                    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                      <select class="select is-medium" name="decade" id="decade-select">
+                        <div class="dropdown-content">
+                        {% for decade in decades %}
+                          <option value="{{decade}}">{{decade.capitalize()}}</option>
+                        {% endfor %}
+                        </div>
+                      </select>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="section has-background-black">
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5 bd-notification is-primary">
+                <div class="dropdown is-active">
+                    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                      <select class="select is-medium" name="track" id="track-select">
+                        <div class="dropdown-content">
+                        {% for track in tracks %}
+                          <option value="{{track}}">{{track.capitalize()}}</option>
+                        {% endfor %}
+                        </div>
+                      </select>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    <section class="section has-background-black">
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5 bd-notification is-primary">
+                <div class="dropdown is-active">
+                    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                      <select class="select is-medium" name="length" id="lenght-select">
+                        <div class="dropdown-content">
+                        {% for length in lengths %}
+                          <option value="{{length}}">{{length.capitalize()}}</option>
+                        {% endfor %}
+                        </div>
+                      </select>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    <section class="section has-background-black">
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5 bd-notification is-primary">
+                <div class="control">
+                  <div class="dropdown is-active is-normal">
+                      <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                        <select class="select is-medium" name="popularity" id="popularity-select">
+                          <div class="dropdown-content">
+                          {% for popularity in popularities %}
+                            <option value="{{popularity}}">{{popularity.capitalize()}}</option>
+                          {% endfor %}
+                          </div>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+    <section>
+        <input class="button is-normal" type="submit" value="Submit input">
+    </section>
+  </form>
+  <footer class="footer d-flex align-items-center justify-content-end p-4 has-background-black color-white">
+    <div class="content has-text-right has-text-white">
+      <p>Made with ❤️ @
+        <a href="https://www.lewagon.com" target="_blank">
+          <img src="static/lewagon_white.png" alt="" width=80>
+        </a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

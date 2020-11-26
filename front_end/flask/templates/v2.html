@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <link rel="stylesheet" href="styles/debug.css">
+
+<section class="hero is-primary is-medium">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head has-background-black">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active">
+              Home
+            </a>
+            <a class="navbar-item">
+              Examples
+            </a>
+            <a class="navbar-item">
+              Documentation
+            </a>
+            <span class="navbar-item">
+              <a class="button is-primary is-inverted">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Download</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body has-background-black">
+    <div class="container has-text-centered">
+      <img src="static/logo.png">
+    </div>
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+
+  <section
+    <div class="dropdown is-up is-active">
+      <div class="dropdown-menu" id="dropdown-menu7" role="menu">
+        <select class = "select" name="genre" id="genre-select">
+          <div class="dropdown-content">
+            <div class="dropdown-item">
+              {% for genre in genres %}
+              <option value="{{genre}}">{{genre.capitalize()}}</option>
+              {% endfor %}
+            </div>
+          </div>
+        </select>
+      </div>
+    </div>
+  </section>
+
+
+  <body>
+  <div class='container has-text-centered'>
+    <div class='columns is-mobile is-centered'>
+      <div class='column is-5'>
+        <div class="dropdown is-up is-hoverable">
+          <div class="dropdown-trigger">
+            <button class="button"
+                    aria-haspopup="true"
+                    aria-controls="dropdown-menu">
+              <span>Left Aligned Todos</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-up"
+                   aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+
+          <div class="dropdown-menu"
+               id="dropdown-menu"
+               role="menu">
+            <div class="dropdown-content">
+              <a href="#" class="dropdown-item">
+                Design a custom database
+                to store your daily activity
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Take pictures of beautiful
+                flowers
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Ride to a horse and write
+                your experience
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Go for a trip with bike
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Design a custom database
+                to store your daily activity
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Buy a sumsung headset
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Listen music for one hour
+              </a>
+
+              <a href="#" class="dropdown-item">
+                Go for a morning walk
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<div class="hero-foot">
+<footer class="footer d-flex align-items-center justify-content-end p-4 has-background-black color-white">
+    <div class="content has-text-centered has-text-white">
+      <p>Made with ❤️ @
+        <a href="https://www.lewagon.com" target="_blank">
+          <img src="static/lewagon_white.png" alt="" width=80>
+        </a>
+      </p>
+    </div>
+  </footer>
+</div>
