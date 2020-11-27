@@ -21,9 +21,20 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
 from spotifyclient import SpotifyClient
 from track import Track
 
+
+'''updates michiel'''
 #Dataframe final
-df_kaggle = pd.read_csv('kaggle_df.csv')
-df_kaggle['year'] = df_kaggle['year'].astype(str)
+def get_data():
+    df_kaggle = pd.read_csv('kaggle_df.csv')
+    df_kaggle['year'] = df_kaggle['year'].astype(str)
+    return df_kaggle
+
+#filter data
+def filter_data(genre, decade, popularity):
+    df_kaggle = get_data()
+    filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(str.lower(genre))]
+    filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity'] == float(popularity))]
+    return filtered_results
 
 
 #Will be replaced by preprocessing pipeline
@@ -48,9 +59,16 @@ def get_choice(df, column):
     print("'%s' = %s\n" % (column, user_answer))
     return user_answer
 
-def getparam(genre, decade, length, popularity):
-    playlist = ["song1", "song2", "song3"]
-    return playlist
+#def getparam(genre, decade, length, popularity):
+    #playlist = [genre, decade, length, popularity]
+    #return playlist
+
+# get filtered data for html
+def filter_data(genre, decade, popularity):
+    df_kaggle = get_data()
+    filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(str.lower(genre))]
+    filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity'] == float(popularity))]
+    return filtered_results
 
 def main():
     spotify_client = SpotifyClient(authorization_token,user_id)
@@ -58,7 +76,7 @@ def main():
     #Asking users for their preferences
     query_genre=input("Which genre?\n>")
     query_pop = input("Popularity? 0 and 100, with 100 being the most popular\n> ")
-    query_decade = get_choice(df=df_kaggle, column="decades")
+    query_decade = get_choice(df=get_data(), column="decades")
     query_duration = input("Duration of the playlist?\n> ")
     print(f" You selected {query_genre} tracks with a popularity of {query_pop}% from the {query_decade} decade for a total duration of {query_duration} minutes")
 
@@ -69,6 +87,7 @@ def main():
     query_genre = str(query_genre)
 
     #filtering the dataset accordingly
+    df_kaggle = get_data()
     filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(query_genre)]
     filtered_results = filtered_genre[(filtered_genre['year'].str.contains(query_decade[1:3])) & (filtered_genre['popularity'] == query_pop)]
 

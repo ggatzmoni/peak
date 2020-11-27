@@ -10,7 +10,7 @@ client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
-from createplaylist import getparam
+from createplaylist import filter_data
 
 import spotipy
 #Authentication with Spotipy package
@@ -100,7 +100,11 @@ def inp():
     if request.method == "POST":
         req = request.form
         genre, decade, length, popularity = req.values()
-        playlist = getparam(req['genre'],req['decade'],req['length'],req['popularity'])
+        print(req['genre'])
+        print(req['decade'])
+        print(req['popularity'])
+        #specify function to input front-end and return html page
+        playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 
         return render_template('playlist.html', playlist=playlist)
 
