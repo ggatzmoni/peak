@@ -9,7 +9,6 @@ client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
 
-
 import spotipy
 #Authentication with Spotipy package
 from spotipy.oauth2 import SpotifyOAuth
@@ -48,6 +47,10 @@ def get_choice(df, column):
     user_answer = [val[1] for val in choices if val[0]==int(user_input)][0]
     print("'%s' = %s\n" % (column, user_answer))
     return user_answer
+
+def getparam(genre, decade, length, popularity):
+    playlist = ["song1", "song2", "song3"]
+    return playlist
 
 def main():
     spotify_client = SpotifyClient(authorization_token,user_id)

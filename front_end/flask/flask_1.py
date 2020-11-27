@@ -2,6 +2,7 @@
 from flask import Flask, redirect, url_for, render_template, request
 from function import genre, decade, track, length, popularity
 from createplaylist import main
+from werkzeug.datastructures import ImmutableMultiDict
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -9,6 +10,7 @@ client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
+from createplaylist import getparam
 
 import spotipy
 #Authentication with Spotipy package
@@ -92,14 +94,15 @@ def center():
     popularities = popularity()
     return render_template("center.html", genres=genres, decades=decades, tracks = tracks, lengths = lengths, popularities = popularities)
 
+
 @app.route("/algo_input", methods=["POST","GET"])
 def inp():
     if request.method == "POST":
-
         req = request.form
-        print(req)
+        genre, decade, length, popularity = req.values()
+        playlist = getparam(req['genre'],req['decade'],req['length'],req['popularity'])
 
-        return render_template("algo_running.html")
+        return render_template('playlist.html', playlist=playlist)
 
     return render_template("v3.html")
 
