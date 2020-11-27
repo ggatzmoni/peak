@@ -35,10 +35,10 @@ def home():
     return render_template("index.html")
 
 # acces to page via parameter
-@app.route("/<name>")
+#@app.route("/<name>")
 #speficy different pages via f string
-def user(name):
-    return render_template("v1")
+#def user(name):
+    #return render_template("v1")
 
 #redirect to home when on admin page
 @app.route("/admin")
@@ -53,9 +53,17 @@ def player():
         print(msg)
     return render_template("player.html", main=main)
 
-@app.route("/v1")
-def v1():
-    return render_template("v1.html")
+#@app.route("/v1")
+#def v1():
+    #return render_template("v1.html")
+
+@app.route("/algo_running")
+def algo():
+    return render_template("algo_running.html")
+
+@app.route("/page_player")
+def playlist():
+    return render_template("page_player.html")
 
 @app.route("/v2", methods=["POST","GET"])
 def v2():
@@ -100,9 +108,7 @@ def inp():
     if request.method == "POST":
         req = request.form
         genre, decade, length, popularity = req.values()
-        print(req['genre'])
-        print(req['decade'])
-        print(req['popularity'])
+        print(genre)
         #specify function to input front-end and return html page
         playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 

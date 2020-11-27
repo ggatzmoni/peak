@@ -23,6 +23,7 @@ from track import Track
 
 
 '''updates michiel'''
+from IPython.display import HTML
 #Dataframe final
 def get_data():
     df_kaggle = pd.read_csv('kaggle_df.csv')
@@ -34,7 +35,8 @@ def filter_data(genre, decade, popularity):
     df_kaggle = get_data()
     filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(str.lower(genre))]
     filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity'] == float(popularity))]
-    return filtered_results
+    filtered_results_show = filtered_results[['artists','track_name']]
+    return filtered_results_show
 
 
 #Will be replaced by preprocessing pipeline
@@ -64,11 +66,6 @@ def get_choice(df, column):
     #return playlist
 
 # get filtered data for html
-def filter_data(genre, decade, popularity):
-    df_kaggle = get_data()
-    filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(str.lower(genre))]
-    filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity'] == float(popularity))]
-    return filtered_results
 
 def main():
     spotify_client = SpotifyClient(authorization_token,user_id)

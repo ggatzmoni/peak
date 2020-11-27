@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -25,15 +26,18 @@
 <body>
 
 <!-- .hero -->
-<section class="hero is-fullheight">
-
-</section>
+<section class="hero is-fullheight"></section>
 <!-- /.hero -->
-<section class="hero-body has-text-centered" style="top: 250px;">
-  <div class = "is-overlay">
-    <h1 class="title has-text-weight-light has-text-white">Please wait while we load your playlist</h1>
-    <h2 class="subtitle has-text-weight-light has-text-white">We currently have (dynamic count) songs available!</h2>
+  <div class="modal is-active is-primary">
+    <article class="message is-medium has-background-white">
+      <div class="message-header has-background-white has-text-black">
+        <p>----Please specify the name of your playlist below !----</p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        <input class="input" type="text" placeholder="....we need to distract you while our algorithm runs....">
+      </div>
+    </article>
   </div>
-</section>
-  </body>
-</html>
+
+</body>

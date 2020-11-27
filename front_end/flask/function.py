@@ -10,7 +10,7 @@ def track():
     return ['123 - abc', '456 - def', '789 - ghi', 'other']
 
 def length():
-    return ['30m', '60m', '90m', 'other']
+    return ['30', '60', '90', 'other']
 
 def popularity():
     return ['90', '80', '70', '60']
