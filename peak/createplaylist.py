@@ -1,19 +1,21 @@
 # -*- coding: UTF-8 -*-
 import pandas as pd
-#Importing stuffs for authentication with Spotify API
 from dotenv import load_dotenv
 import os
+import spotipy
+from spotipy.oauth2 import SpotifyOAuth
+#Import classes from other files
+from spotifyclient import *
+from track import Track
+from final_knn import get_seed_features, get_k_dist_ind
+#Authentication with Spotify API
 load_dotenv()
+authorization_token = generating_access_token()
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
-authorization_token = os.environ.get('authorization_token')
-
-
-import spotipy
 #Authentication with Spotipy package
-from spotipy.oauth2 import SpotifyOAuth
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
                                                client_secret=client_secret,
                                                redirect_uri="https://example.com", #replace with our website url
                                                scope="playlist-modify-public"))
@@ -23,8 +25,8 @@ from spotifyclient import SpotifyClient
 from track import Track
 
 #Dataframe final
-df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
-df_kaggle['year'] = df_kaggle['year'].astype(str)
+df_kaggle = pd.read_csv('../raw_data/full_dataset.csv')
+df_kaggle['year'] = df_kaggle['year'].astype(str) #must be int if used for model
 
 
 #Will be replaced by preprocessing pipeline
@@ -65,19 +67,23 @@ def main():
     query_decade = str(query_decade)
     query_genre = str(query_genre)
 
-    #filtering the dataset accordingly
+    #Filtering the dataset accordingly
     filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(query_genre)]
     filtered_results = filtered_genre[(filtered_genre['year'].str.contains(query_decade[1:3])) & (filtered_genre['popularity'] == query_pop)]
 
-    # Select 1 random track seed from the filtered_results
-    # Insert here the recommendation algorythm from Luam
+    #Get features of 1 random seed track from the filtered_results
+    tempo, loudness, da, energy = get_seed_features(filtered_results)
+    #Use trained knn model to get k=100 recommendations df
+    knn_trained = pickle.load(open("knn_trained.pkl","rb")) # load trained model
+    knn_out = get_k_dist_ind(knn_trained, tempo, loudness, da, energy) # get output: distances & indices
+    indices = knn_out[1][0].tolist() # get indices
+    recs = filtered_results.iloc[ind] # recommendations df
 
-    # (filtered_results will be replaced by the name of Luam's output dataframe)
-    filtered_duration = filtered_results[filtered_results['duration_min'].cumsum() <= query_duration]
+    #Filter recommendations based on user's preferred duration
+    filtered_duration = recs[recs['duration_min'].cumsum() <= query_duration]
     recommended_playlist = filtered_duration.reset_index(drop=True)
     recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
     print(recommended_tracks)
-
 
     # get playlist name from user and create playlist
     playlist_name = input("\nWhat's the playlist name? ")

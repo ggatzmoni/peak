@@ -2,20 +2,31 @@
 import json
 import requests
 import pandas as pd
-
-#Importing stuffs for authentication with Spotify API
 import os
 from dotenv import load_dotenv
-load_dotenv()
-
-client_id = os.environ.get('CLIENT_ID')
-client_secret = os.environ.get('CLIENT_SECRET')
-authorization_token = os.environ.get('authorization_token')
-user_id = os.environ.get('user_id')
-
 #Import classes from other files
 from track import Track
 from playlist import Playlist
+#Authentication with Spotify API
+load_dotenv()
+client_id = os.environ.get('CLIENT_ID')
+client_secret = os.environ.get('CLIENT_SECRET')
+user_id = os.environ.get('user_id')
+# Function to generate an authorization_token that lasts longer
+def generating_access_token():
+    response = requests.post(
+        url='https://accounts.spotify.com/api/token',
+        data={
+        'grant_type':'refresh_token',
+        'refresh_token':os.environ.get('refresh_token'),
+        'client_id':os.environ.get('CLIENT_ID'),
+        'client_secret':os.environ.get('CLIENT_SECRET')
+        }
+    )
+    response = response.json()
+    authorization_token = response['access_token']
+    return authorization_token
+authorization_token = generating_access_token()
 
 #Dataframe final
 df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
