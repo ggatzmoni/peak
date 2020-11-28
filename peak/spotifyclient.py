@@ -29,7 +29,7 @@ def generating_access_token():
 authorization_token = generating_access_token()
 
 #Dataframe final
-df_kaggle = pd.read_csv('../raw_data/kaggle_df.csv')
+df_kaggle = pd.read_csv('../raw_data/full_dataset.csv')
 
 class SpotifyClient:
     """SpotifyClient performs operations using the Spotify API."""
