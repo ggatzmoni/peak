@@ -3,12 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Peak!</title>
+    <title>Peak! - home</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <link rel="stylesheet" href="styles/debug.css">
   </head>
+
+  <style>
+  .custom-select {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: white;
+  background-color: transparent;
+  text-align-last:center;
+
+}
+
+</style>
 
 <body>
     <section class = "hero is-medium has-background-black">
@@ -26,9 +42,9 @@
     <form action="/algo_input" method="POST">
       <div class="container has-text-centered">
         <div class="columns is-vcentered is-10">
-          <div class="dropdown is-active column is-2">
+          <div class="dropdown is-active column is-2" style="margin-top: -68px">
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="select is-medium has-background-black has-text-white" name="genre" id="genre-select">
+              <select class="custom-select is-medium has-background-black has-text-white" name="genre" id="genre-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Genre</option>
                 {% for genre in genres %}
@@ -38,9 +54,9 @@
               </select>
             </div>
           </div>
-          <div class="dropdown is-active column is-2">
+          <div class="dropdown is-active column is-2" style="margin-top: -68px">
            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="select is-medium has-background-black has-text-white" name="decade" id="decade-select">
+              <select class="custom-select is-medium has-background-black has-text-white" name="decade" id="decade-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Decade</option>
                 {% for decade in decades %}
@@ -50,9 +66,9 @@
               </select>
             </div>
           </div>
-          <div class="dropdown is-active column is-2">
+          <div class="dropdown is-active column is-2" style="margin-top: -68px">
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="select is-medium has-background-black has-text-white" name="length" id="length-select">
+              <select class="custom-select is-medium has-background-black has-text-white" name="length" id="length-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Length</option>
                 {% for length in lengths %}
@@ -62,9 +78,9 @@
               </select>
             </div>
           </div>
-          <div class="dropdown is-active column is-2">
+          <div class="dropdown is-active column is-2" style="margin-top: -68px">
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="select is-medium has-background-black has-text-white" name="popularity" id="popularity-select">
+              <select class="custom-select is-medium has-background-black has-text-white is-rounded" name="popularity" id="popularity-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Popularity</option>
                 {% for popularity in popularities %}
@@ -75,16 +91,17 @@
             </div>
           </div>
           <div class="column is-active is-active is-2">
-            <input class="button is-normal is-black has-text-weight-bold" type="submit" value="Submit input ">
+            <input class="button is-normal has-background-black has-text-white is-outlined" type="submit" value="Submit input">
           </div>
         </div>
       </div>
     </from>
       <div>
-        <div class="content has-text-weight-bold has-text-right has-text-white is-2">
+        <div class="content has-text-right has-text-white is-2" style="margin-top: -40px">
           <p>Made with ❤️ @
             <a href="https://www.lewagon.com" target="_blank">
-              <img src="static/lewagon_white.png" alt="" width=80>
+              <img src="static/logo_lewagon_red.png"  style="margin-top: -40px" alt="" width=20>
+              <img src="static/lewagon_white.png"  style="margin-top: -40px" alt="" width=60>
             </a>
           </p>
         </div>

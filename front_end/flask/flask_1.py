@@ -57,7 +57,7 @@ def player():
 #def v1():
     #return render_template("v1.html")
 
-@app.route("/algo_running")
+@app.route("/algo_running", methods=["POST","GET"])
 def algo():
     return render_template("algo_running.html")
 
@@ -104,15 +104,28 @@ def center():
 
 
 @app.route("/algo_input", methods=["POST","GET"])
-def inp():
+def algo_input():
     if request.method == "POST":
         req = request.form
         genre, decade, length, popularity = req.values()
-        print(genre)
+        print(request.form)
         #specify function to input front-end and return html page
         playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 
-        return render_template('playlist.html', playlist=playlist)
+        return render_template('algo_running.html')
+
+    return render_template("v3.html")
+
+@app.route("/playlist_input", methods=["POST","GET"])
+def playlist_input():
+    if request.method == "POST":
+        req = request.form
+        #genre, decade, length, popularity = req.values()
+        print(req)
+        #specify function to input front-end and return html page
+        #playlist = filter_data(req['genre'],req['decade'],req['popularity'])
+
+        return render_template('page_player.html')
 
     return render_template("v3.html")
 

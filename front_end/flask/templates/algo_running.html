@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Peak - playlist</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
@@ -26,18 +26,25 @@
 <body>
 
 <!-- .hero -->
-<section class="hero is-fullheight"></section>
-<!-- /.hero -->
-  <div class="modal is-active is-primary">
-    <article class="message is-medium has-background-white">
-      <div class="message-header has-background-white has-text-black">
-        <p>----Please specify the name of your playlist below !----</p>
-        <button class="delete" aria-label="delete"></button>
+  <section class="hero is-fullheight"></section>
+  <!-- /.hero -->
+    <form action="/playlist_input" method="POST">
+      <div class="modal is-active is-primary">
+        <article class="message is-medium has-background-white">
+          <div class="message-header has-background-white has-text-black">
+              <p>----   Please specify the name of your playlist below !   ----</p>
+            </div>
+          <div class="message-body">
+            <div class="control">
+              <input class="input" type="text" placeholder="....we need to distract you while our algorithm runs....">
+            </div>
+          </div>
+            <div class="column is-active is-active is-2">
+              <input class="button is-normal has-background-white has-text-black is-right-outlined is-right-outlined" type="submit" value="Submit input ">
+            </div>
+        </article>
       </div>
-      <div class="message-body">
-        <input class="input" type="text" placeholder="....we need to distract you while our algorithm runs....">
-      </div>
-    </article>
-  </div>
+    </form>
+   </section>
 
 </body>
