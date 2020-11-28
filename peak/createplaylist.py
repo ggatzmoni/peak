@@ -94,10 +94,21 @@ def main():
     #Filter recommendations based on user's preferred duration
     filtered_duration = refiltered_results[refiltered_results['duration_min'].cumsum() <= query_duration]
     recommended_playlist = filtered_duration.reset_index(drop=True)
-    recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
+
+    #sorting the playlist by tempo
+    recommended_playlist.sort_values(by=['scaled_tempo'])
+    split_threshold = round(len(recommended_playlist)/2)
+    asc_playlist = recommended_playlist.iloc[0:split_threshold].sort_values(by=['scaled_tempo'], ascending=True)
+    desc_playlist = recommended_playlist.iloc[split_threshold:].sort_values(by=['scaled_tempo'], ascending=False)
+    frames = [asc_playlist, desc_playlist]
+    sorted_playlist = pd.concat(frames)
+    sorted_playlist = sorted_playlist.reset_index(drop=True)
 
 
-    # get playlist name from user and create playlist
+    recommended_tracks = sorted_playlist[['track_name','track_id','artists']]
+
+
+    # get playlist name from user and create empty playlist
     playlist_name = input("\nWhat's the playlist name? ")
     playlist_name = str(playlist_name)
     playlist = spotify_client.create_playlist(playlist_name)
@@ -105,7 +116,7 @@ def main():
 
 
     # populate playlist with recommended tracks
-    tracks_id = filtered_duration['track_id'].tolist()
+    tracks_id = sorted_playlist['track_id'].tolist()
     sp.playlist_add_items(playlist_id, tracks_id, position=None)
     print('Your playlist was successfully added to your spotify account')
 

@@ -66,25 +66,3 @@ class SpotifyClient:
         # create playlist from the class in playlist.py
         playlist = Playlist(name, playlist_id)
         return playlist
-
-
-    '''def _place_get_api_request(self, url):
-        response = requests.get(
-            url,
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self._authorization_token}"
-            }
-        )
-        return response
-
-    def _place_post_api_request(self, url, data):
-        response = requests.post(
-            url,
-            data=data,
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self._authorization_token}"
-            }
-        )
-        return response'''
