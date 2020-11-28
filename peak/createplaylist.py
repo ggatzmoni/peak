@@ -75,12 +75,16 @@ def main():
     da = seed['danceability'].iat[0]
     energy = seed['energy'].iat[0]
 
-    # load pickle file to import trained model
-    knn_trained = pickle.load(open("/knn_trained.pkl","rb"))
+    # couldn't get proper results with loading pickle file , please check
+    features_names = ['scaled_tempo', 'scaled_loudness', 'danceability', 'energy'] # 'scaled_year', 'popularity_binned'
+    X = filtered_results[features_names]
+    y = filtered_results['track_id']
+    model = KNeighborsRegressor(algorithm='kd_tree', n_jobs=-1).fit(X, y)
+
 
     # get trained model output for k: distances & indices
     knn_out, k = [], 100
-    knn_out = knn_trained.kneighbors([[tempo,loudness,da,energy]], n_neighbors=k)
+    knn_out = model.kneighbors([[tempo,loudness,da,energy]], n_neighbors=k)
     ind = knn_out[1][0].tolist() # get indices
     recs = filtered_results.iloc[ind] # recommendations df
 
