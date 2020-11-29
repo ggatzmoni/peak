@@ -11,6 +11,7 @@ client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
 from createplaylist import filter_data
+from flask_sqlalchemy import SQLAlchemy
 
 import spotipy
 #Authentication with Spotipy package
@@ -26,6 +27,21 @@ from track import Track
 
 '''instance flask web application'''
 app = Flask(__name__)
+
+#config parameters database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+'''create DB'''
+db = SQLAlchemy(app)
+
+class users(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    playlist = db.Column("playlist", db.String(100))
+
+    def __init__(self, playlist):
+        self.playlist = playlist
 
 '''define pages on app'''
 # access to page via function decorater - start page
