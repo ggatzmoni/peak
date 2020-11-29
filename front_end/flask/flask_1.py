@@ -112,20 +112,20 @@ def algo_input():
         #specify function to input front-end and return html page
         playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 
-        return render_template('algo_running.html')
+        return redirect('/algo_running')
 
     return render_template("v3.html")
 
 @app.route("/playlist_input", methods=["POST","GET"])
 def playlist_input():
     if request.method == "POST":
-        req = request.form
+        req = request.form.get('playlist_name')
         #genre, decade, length, popularity = req.values()
         print(req)
         #specify function to input front-end and return html page
         #playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 
-        return render_template('page_player.html')
+        return redirect('/page_player')
 
     return render_template("v3.html")
 
