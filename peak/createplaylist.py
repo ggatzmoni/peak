@@ -25,7 +25,7 @@ user_id = os.environ.get('user_id')
 #Authentication with Spotipy package
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
                                                client_secret=client_secret,
-                                               redirect_uri="https://example.com", #replace with our website url
+                                               redirect_uri="https://peak-music.herokuapp.com/", #replace with our website url
                                                scope="playlist-modify-public"))
 
 
