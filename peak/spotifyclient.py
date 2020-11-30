@@ -28,6 +28,21 @@ def generating_access_token():
     return authorization_token
 authorization_token = generating_access_token()
 
+
+'''def get_user_profile():
+    response = requests.get(
+        f"https://api.spotify.com/v1/me",
+        headers={
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {authorization_token}"
+        }
+    )
+    response_json = response.json()
+    user_id = response_json['id']
+    return user_id
+
+#user_id = get_user_profile()'''
+
 #Dataframe final
 df_kaggle = pd.read_csv('../raw_data/full_dataset.csv')
 
