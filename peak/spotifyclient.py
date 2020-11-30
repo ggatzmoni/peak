@@ -13,6 +13,7 @@ client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 # Function to generate an authorization_token that lasts longer
+
 def generating_access_token():
     response = requests.post(
         url='https://accounts.spotify.com/api/token',
@@ -26,6 +27,7 @@ def generating_access_token():
     response = response.json()
     authorization_token = response['access_token']
     return authorization_token
+
 authorization_token = generating_access_token()
 
 
@@ -58,7 +60,7 @@ class SpotifyClient:
         self._user_id = user_id
 
 
-    def create_playlist(self, name):
+    def create_playlist(self, playlist_name):
         """
         :param name (str): New playlist name
         :return playlist (Playlist): Newly created playlist
@@ -66,7 +68,7 @@ class SpotifyClient:
         response = requests.post(
             f"https://api.spotify.com/v1/users/{self._user_id}/playlists",
             json.dumps({
-            "name": name,
+            "name": playlist_name,
             "description": "Recommended songs by Peak",
             "public": True
         }),
@@ -79,5 +81,8 @@ class SpotifyClient:
         playlist_id = response_json["id"]
 
         # create playlist from the class in playlist.py
-        playlist = Playlist(name, playlist_id)
+        playlist = Playlist(playlist_name, playlist_id)
         return playlist
+
+    def create_spotify_uri(track_id):
+        return f"spotify:track:{track_id}"

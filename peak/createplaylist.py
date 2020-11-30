@@ -49,6 +49,9 @@ def get_choice(df, column):
     print("'%s' = %s\n" % (column, user_answer))
     return user_answer
 
+def create_spotify_uri(track_id):
+        return f"spotify:track:{track_id}"
+
 
 def main():
     spotify_client = SpotifyClient(authorization_token,user_id)
@@ -113,12 +116,22 @@ def main():
     playlist_name = input("\nWhat's the playlist name? ")
     playlist_name = str(playlist_name)
     playlist = spotify_client.create_playlist(playlist_name)
-    playlist_id =playlist.id
+    playlist_id =playlist.playlist_id
 
 
     # populate playlist with recommended tracks
     tracks_id = sorted_playlist['track_id'].tolist()
-    sp.playlist_add_items(playlist_id, tracks_id, position=None)
+    #sp.playlist_add_items(playlist_id, tracks_id, position=None)
+    track_uris = [create_spotify_uri(track) for track in tracks_id]
+    response = requests.post(
+        url=f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+        data = json.dumps(track_uris),
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {authorization_token}"
+        }
+    )
+    response = response.json()
     print('Your playlist was successfully added to your spotify account')
 
 if __name__ == "__main__":
