@@ -21,6 +21,7 @@ load_dotenv()
 authorization_token = generating_access_token()
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
+#user_id = get_user_profile()
 user_id = os.environ.get('user_id')
 #Authentication with Spotipy package
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
