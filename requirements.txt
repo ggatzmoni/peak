@@ -11,3 +11,4 @@ python-gitlab
 twine
 python-dotenv
 numpy
+pickle
