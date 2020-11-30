@@ -10,7 +10,7 @@ client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
-from createplaylist import filter_data
+from createplaylist import filter_data, filter_duration
 from flask_sqlalchemy import SQLAlchemy
 
 import spotipy
@@ -57,9 +57,6 @@ def home():
     #return render_template("v1")
 
 #redirect to home when on admin page
-@app.route("/admin")
-def admin():
-    return redirect(url_for("home"))
 
 #create player page
 @app.route("/player", methods=['POST','GET'])
@@ -77,36 +74,13 @@ def player():
 def algo():
     return render_template("algo_running.html")
 
-@app.route("/page_player")
+@app.route("/playlist", methods=["POST","GET"])
 def playlist():
+    return render_template("playlist.html")
+
+@app.route("/page_player", methods=["POST","GET"])
+def page_player():
     return render_template("page_player.html")
-
-@app.route("/v2", methods=["POST","GET"])
-def v2():
-    genres = genre()
-    decades = decade()
-    tracks = track()
-    lengths = length()
-    popularities = popularity()
-    return render_template("v2.html", genres=genres, decades=decades, tracks = tracks, lengths = lengths, popularities = popularities)
-
-@app.route("/v3", methods=["POST","GET"])
-def v3():
-    genres = genre()
-    decades = decade()
-    tracks = track()
-    lengths = length()
-    popularities = popularity()
-    return render_template("v3.html", genres=genres, decades=decades, tracks = tracks, lengths = lengths, popularities = popularities)
-
-@app.route("/v4", methods=["POST","GET"])
-def v4():
-    genres = genre()
-    decades = decade()
-    tracks = track()
-    lengths = length()
-    popularities = popularity()
-    return render_template("v4.html", genres=genres, decades=decades, tracks = tracks, lengths = lengths, popularities = popularities)
 
 
 @app.route("/center", methods=["POST","GET"])
@@ -124,26 +98,26 @@ def algo_input():
     if request.method == "POST":
         req = request.form
         genre, decade, length, popularity = req.values()
-        print(request.form)
         #specify function to input front-end and return html page
-        playlist = filter_data(req['genre'],req['decade'],req['popularity'])
+        playlist = filter_duration(req['genre'],req['decade'],req['popularity'],req['length'])
+        print(playlist)
 
-        return redirect('/algo_running')
+        return render_template('algo_running.html', length=length, genre=genre, decade=decade, popularity=popularity)  #redirect('/algo_running'
 
-    return render_template("v3.html")
+    return render_template("center.html")
 
 @app.route("/playlist_input", methods=["POST","GET"])
 def playlist_input():
     if request.method == "POST":
-        req = request.form.get('playlist_name')
+        playlist_name = request.form.get('playlist_name')
+        print(playlist_name)
         #genre, decade, length, popularity = req.values()
-        print(req)
         #specify function to input front-end and return html page
         #playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 
-        return redirect('/page_player')
+        return render_template('page_player.html', playlist_name=playlist_name)
 
-    return render_template("v3.html")
+    return render_template("center.html")
 
 
 '''run app'''

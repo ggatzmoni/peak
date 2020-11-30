@@ -26,7 +26,7 @@ from track import Track
 from IPython.display import HTML
 #Dataframe final
 def get_data():
-    df_kaggle = pd.read_csv('kaggle_df.csv')
+    df_kaggle = pd.read_csv('full_dataset.csv')
     df_kaggle['year'] = df_kaggle['year'].astype(str)
     return df_kaggle
 
@@ -34,9 +34,16 @@ def get_data():
 def filter_data(genre, decade, popularity):
     df_kaggle = get_data()
     filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(str.lower(genre))]
-    filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity'] == float(popularity))]
+    filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity_binned'] == str(popularity))]
     filtered_results_show = filtered_results[['artists','track_name']]
-    return filtered_results_show
+    return filtered_results
+
+def filter_duration(genre, decade, popularity, length):
+    filtered_results2 = filter_data(genre, decade, popularity)
+    filtered_duration = filtered_results2[filtered_results2['duration_min'].cumsum() <= int(length)]
+    recommended_playlist = filtered_duration.reset_index(drop=True)
+    recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
+    return recommended_tracks
 
 
 #Will be replaced by preprocessing pipeline

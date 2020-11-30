@@ -11,15 +11,67 @@
   </head>
 
   <style>
-  .custom-select {
+  .custom-select1 {
   font-family: Arial;
   font-size: 16px;
   padding: 6.5px;
   border-radius: 4px;
   border-style: double;
   border-width: 2px;
-  border-color: white;
-  background-color: transparent;
+  border-color: rgb(127, 41, 130);
+  background-color: rgb(127, 41, 130);
+  text-align-last:center;
+
+}
+
+  .custom-select2 {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(0, 194, 209);
+  background-color: rgb(0, 194, 209);
+  text-align-last:center;
+
+}
+
+  .custom-select3 {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(210, 248, 152);
+  background-color: rgb(210, 248, 152);
+  text-align-last:center;
+
+}
+
+  .custom-select4 {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(255, 29, 21);
+  background-color: rgb(255, 29, 21);
+  text-align-last:center;
+
+}
+
+  .custom-button {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(255, 193, 0);
+  background-color: rgb(255, 193, 0);
   text-align-last:center;
 
 }
@@ -28,9 +80,9 @@
 
 <body>
     <section class = "hero is-medium has-background-black">
-      <div class="hero-head is-right">
+      <div class="hero-body is-right">
         <figure class="image right">
-          <img src="static/logo.png" sty@le="top: 560px;">
+          <img src="static/peaklogo.png" sty@le="top: 560px;">
         </figure>
       </div>
     </section>
@@ -44,7 +96,7 @@
         <div class="columns is-vcentered is-10">
           <div class="dropdown is-active column is-2" style="margin-top: -68px">
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="custom-select is-medium has-background-black has-text-white" name="genre" id="genre-select">
+              <select class="custom-select1 is-medium has-text-black" name="genre" id="genre-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Genre</option>
                 {% for genre in genres %}
@@ -56,7 +108,7 @@
           </div>
           <div class="dropdown is-active column is-2" style="margin-top: -68px">
            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="custom-select is-medium has-background-black has-text-white" name="decade" id="decade-select">
+              <select class="custom-select2 is-medium has-text-black" name="decade" id="decade-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Decade</option>
                 {% for decade in decades %}
@@ -68,7 +120,7 @@
           </div>
           <div class="dropdown is-active column is-2" style="margin-top: -68px">
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="custom-select is-medium has-background-black has-text-white" name="length" id="length-select">
+              <select class="custom-select3 is-medium has-text-black" name="length" id="length-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Length</option>
                 {% for length in lengths %}
@@ -80,7 +132,7 @@
           </div>
           <div class="dropdown is-active column is-2" style="margin-top: -68px">
             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-              <select class="custom-select is-medium has-background-black has-text-white is-rounded" name="popularity" id="popularity-select">
+              <select class="custom-select4 is-medium has-text-black is-rounded" name="popularity" id="popularity-select">
                 <div class="dropdown-content">
                   <option value="" disabled selected>Popularity</option>
                 {% for popularity in popularities %}
@@ -91,14 +143,13 @@
             </div>
           </div>
           <div class="column is-active is-active is-2">
-            <input class="button is-normal has-background-black has-text-white is-outlined" type="submit" value="Submit input">
+            <input class="custom-button is-normal has-text-black is-outlined has-text-weight-bold" type="submit" value="Submit input">
           </div>
         </div>
       </div>
     </from>
       <div>
         <div class="content has-text-right has-text-white is-2" style="margin-top: -40px">
-          <p>Made with ❤️ @
             <a href="https://www.lewagon.com" target="_blank">
               <img src="static/logo_lewagon_red.png"  style="margin-top: -40px" alt="" width=20>
               <img src="static/lewagon_white.png"  style="margin-top: -40px" alt="" width=60>

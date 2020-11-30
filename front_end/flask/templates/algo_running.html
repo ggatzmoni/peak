@@ -8,34 +8,39 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <!-- <link rel="stylesheet" href="styles/debug.css"> -->
-    <style>
+</head>
 
-.hero {
-  background: url(static/bell_curve.png) center / cover ;
+<style>
+.modal-select {
+  opacity: 1 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
-.top    { align-items:     flex-start; }
-
-
-@media (max-width: 1024px) { .hero { background: url(static/bell_curve.png) center / cover; } }
-@media (max-width:  768px) { .hero { background: url(static/bell_curve.png) center / cover; } }
-
-    </style>
-  </head>
+</style>
 
 <body>
+    <section class = "hero is-medium has-background-black">
+      <div class="hero-body is-right">
+        <figure class="image right">
+          <img src="static/peaklogo.png" sty@le="top: 560px;">
+        </figure>
+      </div>
+    </section>
+</body>
 
 <!-- .hero -->
-  <section class="hero is-fullheight"></section>
+  <section class="hero"></section>
   <!-- /.hero -->
-    <form action="/playlist_input" method="GET">
+    <form action="/playlist_input" method="POST">
       <div class="modal is-active is-primary">
         <article class="message is-medium has-background-white">
           <div class="message-header has-background-white has-text-black">
-              <p>----   Please specify the name of your playlist below !   ----</p>
+              <p>Please specify the name of your playlist below !</p>
             </div>
           <div class="message-body">
-            <input class="input" type="text" placeholder="....we need to distract you while our algorithm runs...." name="playlist">
+            <input class="input" type="text" placeholder="....we need to distract you while our algorithm runs...." name="playlist_name">
           </div>
             <div class="column is-active is-active is-2">
               <input class="button is-normal has-background-white has-text-black is-right-outlined is-right-outlined" type="submit" value="Submit input ">
@@ -44,5 +49,21 @@
       </div>
     </form>
    </section>
+    <section class="hero-foot">
+      <section class="section has-background-black">
+      <div>
+        <div class="content has-text-right has-text-white is-2" style="margin-top: -40px">
+            <a href="https://www.lewagon.com" target="_blank">
+              <img src="static/logo_lewagon_red.png"  style="margin-top: -40px" alt="" width=20>
+              <img src="static/lewagon_white.png"  style="margin-top: -40px" alt="" width=60>
+            </a>
+        </div>
+      </div>
+        </div>
+      </section>
+    </section>
 
-</body>
+
+
+
+
