@@ -11,21 +11,27 @@
 </head>
 
 <style>
-.modal-select {
-  opacity: 1 !important;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 .message-select {
   height: 50%;
   width: 50%;
 }
+
+.has-background-select {
+    background-image: url(static/background_grain.jpeg);
+}
+
+.button {
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
+}
+
+.input {
+box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
+}
 </style>
 
 <body>
-    <section class = "hero is-medium has-background-black">
+    <section class = "hero is-medium has-background-select">
       <div class="hero-body is-right">
         <figure class="image right">
           <img src="static/peaklogo.png" sty@le="top: 560px;">
@@ -36,13 +42,12 @@
 
 <!-- .hero -->
 <section class="hero-foot">
-  <section class="section has-background-black">
+  <section class="section has-background-select">
       <form action="/playlist_input" method="POST">
         <div class="container has-text-centered">
           <div class="columns is-vcentered is-active is-10">
-            <div class="field is-active column is-vcentered is-6" style="margin-top: -100px">
-              <label class="label has-text-white">Please specify your playlist name</label>
-                <input class="input has-text-centered" type="text" placeholder="....we need to distract you while our algorithm runs...." name="playlist_name">
+            <div class="field is-active column is-vcentered is-6" style="margin-top: -70px">
+                <input class="input has-text-centered has-text-black" type="text" placeholder="Please specify your playlist name" name="playlist_name">
               </div>
                 <div class="column is-vcentered is-active is-4" style="margin-top: -80px">
                   <input class="button is-normal has-background-white has-text-black is-right-outlined is-right-outlined" type="submit" value="Submit input ">

@@ -17,29 +17,49 @@
   margin-right: auto;
   width: 50%;
 }
+.has-background-select {
+    background-image: url(static/background_grain.jpeg);
+}
+.modal {
+  position: absolute;
+  top: 40%;
+}
+
+.image-select {
+  padding-top: 30px;
+}
+
+.container-select {
+    position:   relative;
+}
+
+#toTop {
+    position:   absolute;
+    top:        5px;
+    left:       5px;
+    text-align: left;
+}
+
 </style>
 
 <body>
-    <section class = "hero is-medium has-background-black">
-      <div class="hero-body">
-        <figure class="image">
-          <img src="static/curve_bitmapped.png" style="width:800px;height:600px;" class="center">
-        </figure>
-      </div>
-    </section>
+  <div class="section-select">
+  <figure class="image-select has-background-select">
+    <img src="static/curve_bitmapped.png" style="width:800px;height:600px;" class="center">
+  </figure>
 </body>
 
 <!-- .hero -->
   <section class="hero"></section>
   <!-- /.hero -->
       <div class="modal is-active is-primary">
-        <article class="message is-medium has-background-black">
-          <a> <iframe src="https://open.spotify.com/embed/playlist/0JQePLAeDbKPuvy5UXp5xy" width="300" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
+        <article class="message is-medium has-background-select">
+          <a> <iframe src="https://open.spotify.com/embed/playlist/0JQePLAeDbKPuvy5UXp5xy" width="300" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
         </article>
       </div>
    </section>
     <section class="hero-foot">
-      <section class="section has-background-black">
+      <section class="section has-background-select">
       <div>
         <div class="content has-text-right has-text-white is-2" style="margin-top: -40px">
             <a href="https://www.lewagon.com" target="_blank">
@@ -50,4 +70,4 @@
       </div>
         </div>
       </section>
-    </section>
+  </section>

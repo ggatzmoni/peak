@@ -13,75 +13,86 @@
   <style>
   .custom-select1 {
   font-family: Arial;
-  font-size: 16px;
+  font-size: 12px;
   padding: 6.5px;
   border-radius: 4px;
-  border-style: double;
-  border-width: 2px;
-  border-color: rgb(127, 41, 130);
-  background-color: rgb(127, 41, 130);
+  border-style: solid;
+  border-color: rgb(248, 247, 222);
+  background-color: rgb(248, 247, 222);
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
   text-align-last:center;
 
 }
 
   .custom-select2 {
   font-family: Arial;
-  font-size: 16px;
+  font-size: 12px;
   padding: 6.5px;
   border-radius: 4px;
   border-style: double;
   border-width: 2px;
-  border-color: rgb(0, 194, 209);
-  background-color: rgb(0, 194, 209);
-  text-align-last:center;
+  border-color: white;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
 
 }
 
   .custom-select3 {
   font-family: Arial;
-  font-size: 16px;
+  font-size: 12px;
   padding: 6.5px;
   border-radius: 4px;
   border-style: double;
   border-width: 2px;
-  border-color: rgb(210, 248, 152);
-  background-color: rgb(210, 248, 152);
+  border-color: white;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
   text-align-last:center;
 
 }
 
   .custom-select4 {
   font-family: Arial;
-  font-size: 16px;
+  font-size: 12px;
   padding: 6.5px;
   border-radius: 4px;
   border-style: double;
   border-width: 2px;
-  border-color: rgb(255, 29, 21);
-  background-color: rgb(255, 29, 21);
+  border-color: white;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
   text-align-last:center;
 
 }
 
   .custom-button {
   font-family: Arial;
-  font-size: 16px;
+  font-size: 12px;
   padding: 6.5px;
   border-radius: 4px;
   border-style: double;
   border-width: 2px;
-  border-color: rgb(255, 193, 0);
-  background-color: rgb(255, 193, 0);
+  border-color: white;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
   text-align-last:center;
 
+}
+
+.has-background-select {
+    background-image: url(static/background_grain.jpeg);
+}
+
+.image-select {
+padding: 0px, 50px;
 }
 
 </style>
 
 <body>
-    <section class = "hero is-medium has-background-black">
+    <section class = "hero is-medium has-background-select">
       <div class="hero-body is-right">
-        <figure class="image right">
+        <figure class="image-select right">
           <img src="static/peaklogo.png" sty@le="top: 560px;">
         </figure>
       </div>
@@ -90,7 +101,7 @@
 
     <!-- .section -->
 <section class="hero-foot">
-  <section class="section has-background-black">
+  <section class="section has-background-select">
     <form action="/algo_input" method="POST">
       <div class="container has-text-centered">
         <div class="columns is-vcentered is-10">

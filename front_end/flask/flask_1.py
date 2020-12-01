@@ -1,5 +1,5 @@
 '''imports'''
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, session
 from function import genre, decade, track, length, popularity
 from createplaylist import main
 from werkzeug.datastructures import ImmutableMultiDict
@@ -80,8 +80,15 @@ def playlist():
 
 @app.route("/page_player", methods=["POST","GET"])
 def page_player():
-    return render_template("page_player.html")
+    return render_template("page_player.html", length=length, genre=genre, decade=decade, popularity=popularity)
 
+@app.route("/error", methods=["POST","GET"])
+def error():
+    return render_template("experiment.html")
+
+@app.route("/algo_running", methods=["POST","GET"])
+def algo_running():
+    return render_template("algo_running.html", length=length, genre=genre, decade=decade, popularity=popularity)
 
 @app.route("/center", methods=["POST","GET"])
 def center():
@@ -99,8 +106,10 @@ def algo_input():
         req = request.form
         genre, decade, length, popularity = req.values()
         #specify function to input front-end and return html page
+        if filter_data(genre, decade, popularity, length) is False:
+            return redirect("/error")
         result = filter_sort(genre, decade, popularity, length)
-        print(result)
+        #session['genre'] = 'rock'
 
         return render_template('algo_running.html', length=length, genre=genre, decade=decade, popularity=popularity)  #redirect('/algo_running'
 
@@ -110,9 +119,11 @@ def algo_input():
 def playlist_input():
     if request.method == "POST":
         playlist_name = request.form.get('playlist_name')
-        print(playlist_name)
+        #genres = session.get('genre', None)
+        #print(genre)
 
-        return render_template('page_player.html', playlist_name=playlist_name)
+        return render_template('page_player.html')
+
 
     return render_template("center.html")
 
