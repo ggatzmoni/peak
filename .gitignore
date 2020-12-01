@@ -1,6 +1,7 @@
 */version.txt
 *.pyc
 *.swp
+*.csv
 build/
 dist/
 .coverage
