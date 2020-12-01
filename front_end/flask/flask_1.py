@@ -10,7 +10,7 @@ client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
-from createplaylist import filter_data, filter_duration
+from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort
 from flask_sqlalchemy import SQLAlchemy
 
 import spotipy
@@ -99,8 +99,8 @@ def algo_input():
         req = request.form
         genre, decade, length, popularity = req.values()
         #specify function to input front-end and return html page
-        playlist = filter_duration(req['genre'],req['decade'],req['popularity'],req['length'])
-        print(playlist)
+        result = filter_sort(genre, decade, popularity, length)
+        print(result)
 
         return render_template('algo_running.html', length=length, genre=genre, decade=decade, popularity=popularity)  #redirect('/algo_running'
 
@@ -111,9 +111,6 @@ def playlist_input():
     if request.method == "POST":
         playlist_name = request.form.get('playlist_name')
         print(playlist_name)
-        #genre, decade, length, popularity = req.values()
-        #specify function to input front-end and return html page
-        #playlist = filter_data(req['genre'],req['decade'],req['popularity'])
 
         return render_template('page_player.html', playlist_name=playlist_name)
 

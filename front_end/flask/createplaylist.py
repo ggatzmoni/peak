@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
+import numpy as np
 import pandas as pd
+from sklearn.neighbors import KNeighborsRegressor
 #Importing stuffs for authentication with Spotify API
 from dotenv import load_dotenv
 import os
@@ -33,17 +35,48 @@ def get_data():
 #filter data
 def filter_data(genre, decade, popularity):
     df_kaggle = get_data()
-    filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(str.lower(genre))]
-    filtered_results = filtered_genre[(filtered_genre['decades'] == decade) & (filtered_genre['popularity_binned'] == str(popularity))]
-    filtered_results_show = filtered_results[['artists','track_name']]
+    filtered_results = df_kaggle[(df_kaggle['genres'].str.contains(str.lower(genre))) & (df_kaggle['decades'] == decade) & (df_kaggle['popularity_binned'] == popularity)]
     return filtered_results
 
-def filter_duration(genre, decade, popularity, length):
-    filtered_results2 = filter_data(genre, decade, popularity)
+def get_seed(genre, decade, popularity):
+    filtered_results = filter_data(genre, decade, popularity)
+    seed = filtered_results.sample(1)
+    tempo = seed['scaled_tempo'].iat[0]
+    loudness = seed['scaled_loudness'].iat[0]
+    da = seed['danceability'].iat[0]
+    energy = seed['energy'].iat[0]
+    return seed, tempo, loudness, da, energy
+
+def fit_model(genre, decade, popularity):
+    filtered_results = filter_data(genre, decade, popularity)
+    features_names = ['scaled_tempo', 'scaled_loudness', 'danceability', 'energy'] # 'scaled_year', 'popularity_binned'
+    X = filtered_results[features_names]
+    y = filtered_results['track_id']
+    model = KNeighborsRegressor(algorithm='kd_tree', n_jobs=-1).fit(X, y)
+    return model
+
+def train_model(genre, decade, popularity):
+    # get trained model output for k: distances & indices
+    model = fit_model(genre,decade,popularity)
+    seed, tempo, loudness, da, energy = get_seed(genre,decade,popularity)
+    filtered_results = filter_data(genre, decade,popularity)
+    knn_out, k = [], (len(filtered_results) if len(filtered_results)<100 else 100)
+    knn_out = model.kneighbors([[tempo,loudness,da,energy]], n_neighbors=k)
+    ind = knn_out[1][0].tolist() # get indices
+    recs = filtered_results.iloc[ind] # recommendations df
+    return recs
+
+def filter_sort(genre, decade, popularity, length):
+    filtered_results2 = train_model(genre, decade, popularity)
     filtered_duration = filtered_results2[filtered_results2['duration_min'].cumsum() <= int(length)]
     recommended_playlist = filtered_duration.reset_index(drop=True)
     recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
     return recommended_tracks
+
+def get_name(playlist_name):
+    return playlist_name
+
+
 
 
 #Will be replaced by preprocessing pipeline
