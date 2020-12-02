@@ -6,16 +6,21 @@ from sklearn.neighbors import KNeighborsRegressor
 from dotenv import load_dotenv
 import os
 load_dotenv()
-client_id = os.environ.get('CLIENT_ID')
-client_secret = os.environ.get('CLIENT_SECRET')
-user_id = os.environ.get('user_id')
+import boto3
+from boto.s3.connection import S3Connection
+client_id = S3Connection(os.environ['CLIENT_ID'])
+client_secret = S3Connection(os.environ['CLIENT_SECRET'])
+redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
+#client_id = os.environ.get('CLIENT_ID')
+#client_secret = os.environ.get('CLIENT_SECRET')
+#user_id = os.environ.get('user_id')
 
 import spotipy
 #Authentication with Spotipy package
 from spotipy.oauth2 import SpotifyOAuth
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
                                                client_secret=client_secret,
-                                               redirect_uri="https://example.com", #replace with our website url
+                                               redirect_uri=redirect, #replace with our website url
                                                scope="playlist-modify-public"))
 
 #Import classes from other files
