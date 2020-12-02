@@ -10,20 +10,17 @@ load_dotenv()
 #from boto.s3.connection import S3Connection
 #client_id = S3Connection(os.environ['CLIENT_ID'])
 #client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-#redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
-client_id = os.environ.get('CLIENT_ID')
-client_secret = os.environ.get('CLIENT_SECRET')
-user_id = os.environ.get('user_id')
-
-import spotipy
-#Authentication with Spotipy package
-from spotipy.oauth2 import SpotifyOAuth
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
-                                               client_secret=client_secret,
-                                               redirect_uri=redirect, #replace with our website url
-                                               scope="playlist-modify-public"))
-
+#redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
+#client_id = os.environ.get('CLIENT_ID')
+#client_secret = os.environ.get('CLIENT_SECRET')
+#user_id = os.environ.get('user_id')
 #Import classes from other files
+
+client_id="5f88691d8f354fa39ec134df51aa5993"
+client_secret="e7b04bcef93e45feb480491c2eb4d744"
+refresh_token="AQBubjua2E0tmTRjSB8nNPXYG8wpEomRqt8zK-KsMnEOO1DnWxJ3Z1WeCxdrWNrG7Y_B4O0ENxnYYXxwReTxrfT22CtE3HHncthnAGTmDRkDbovB7luN_-v6xsOcvcok-Do"
+redirect="https://peak-music.herokuapp.com"
+user_id='ucsjsq93kh2319qyrsk4atloa'
 
 
 from spotifyclient import *
