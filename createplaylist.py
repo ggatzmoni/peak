@@ -98,7 +98,7 @@ def get_playlist_id(playlist_name):
     playlist_id = playlist.playlist_id
     return playlist_id
 
-def add_items_to_playlist(genre, decade, popularity, length, playlist_name,playlist_id,):
+def add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id):
 ## populate playlist with recommended tracks
     tracks_id = get_tracks_id(genre, decade, popularity, length)
     track_uris = [create_spotify_uri(track) for track in tracks_id]

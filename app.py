@@ -100,7 +100,6 @@ def algo_input():
             return redirect("/error")
         result = filter_sort(genre, decade, popularity, length)
         #session['genre'] = 'rock'
-
         return render_template('algo_running.html', length=length, genre=genre, decade=decade, popularity=popularity)  #redirect('/algo_running'
 
     return render_template("center.html")
@@ -109,6 +108,8 @@ def algo_input():
 def playlist_input():
     if request.method == "POST":
         playlist_name = request.form['playlist_name']
+        get_playlist_id(playlist_name)
+        add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id)
         return render_template('page_player.html', playlist_name=playlist_name)
     return redirect("/error")
 
