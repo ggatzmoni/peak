@@ -11,8 +11,7 @@ client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 #Import classes from other files
 from playlist import Playlist
-#Dataframe final
-df_kaggle = pd.read_csv('kaggle_df.csv')
+
 ##Added this function here
 def generating_access_token():
     response = requests.post(
