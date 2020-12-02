@@ -23,6 +23,10 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
 from spotifyclient import SpotifyClient
 from track import Track
 
+from spotifyclient import *
+from playlist import *
+
+
 
 '''updates michiel'''
 from IPython.display import HTML
@@ -73,37 +77,50 @@ def filter_sort(genre, decade, popularity, length):
     filtered_results2 = train_model(genre, decade, popularity, length)
     filtered_duration = filtered_results2[filtered_results2['duration_min'].cumsum() <= int(length)]
     recommended_playlist = filtered_duration.reset_index(drop=True)
-    recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
+    recommended_playlist.sort_values(by=['scaled_tempo'])
+    split_threshold = round(len(recommended_playlist)/2)
+    asc_playlist = recommended_playlist.iloc[0:split_threshold].sort_values(by=['scaled_tempo'], ascending=True)
+    desc_playlist = recommended_playlist.iloc[split_threshold:].sort_values(by=['scaled_tempo'], ascending=False)
+    frames = [asc_playlist, desc_playlist]
+    sorted_playlist = pd.concat(frames)
+    sorted_playlist = sorted_playlist.reset_index(drop=True)
+    recommended_tracks = sorted_playlist[['track_name','track_id','artists']]
     return recommended_tracks
 
-#def get_playlist(genre, decade, popularity, length, playlist_name):
-    #sorted_playlist = filter_sort(genre, decade, popularity, length)
-    #playlist = spotify_client.create_playlist(playlist_name)
-    #playlist_id = playlist.playlist_id
-    ## populate playlist with recommended tracks
-    #tracks_id = sorted_playlist['track_id'].tolist()
-    ##sp.playlist_add_items(playlist_id, tracks_id, position=None)
-    #track_uris = [create_spotify_uri(track) for track in tracks_id]
-    #response = requests.post(
-        #url=f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
-        #data = json.dumps(track_uris),
-        #headers={
-            #"Content-Type": "application/json",
-            #"Authorization": f"Bearer {authorization_token}"
-        #}
-    #)
-    #response = response.json()
+def get_tracks_id(genre, decade, popularity,length):
+    sorted_playlist = filter_sort(genre, decade, popularity,length)
+    tracks_id = sorted_playlist['track_id'].tolist()
+    return tracks_id
 
+def get_playlist_id(playlist_name):
+    playlist = spotify_client.create_playlist(playlist_name)
+    playlist_id = playlist.playlist_id
+    return playlist_id
 
+def add_items_to_playlist(genre, decade, popularity, length, playlist_name,playlist_id,):
+## populate playlist with recommended tracks
+    tracks_id = get_tracks_id(genre, decade, popularity, length)
+    track_uris = [create_spotify_uri(track) for track in tracks_id]
+    playlist_id = get_playlist_id(playlist_name)
+    response = requests.post(
+        url=f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+        data = json.dumps(track_uris),
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {authorization_token}"
+        }
+    )
+    response = response.json()
+    return response
 
-
+'''
 #Will be replaced by preprocessing pipeline
-'''def formatting(df):
+def formatting(df):
     df['genres'] = df['genres'].astype(str)
     df['duration_min'] = (df['duration_ms']/60000).astype(int)
     df['decades'] = pd.cut(x=df['year'], bins=[1920, 1930, 1940, 1950,1960,1970,1980,1990,2000,2010,2020])
     df['year'] = df['year'].astype(str)
-    return df'''
+    return df
 
 #Display user input as a list of choices
 def get_choice(df, column):
@@ -170,3 +187,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+'''
