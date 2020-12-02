@@ -23,8 +23,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
 from spotifyclient import SpotifyClient
 from track import Track
 
-from spotifyclient import *
-from playlist import *
+#from spotifyclient import *
+#from playlist import *
 
 
 
