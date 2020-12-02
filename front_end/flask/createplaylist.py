@@ -29,7 +29,7 @@ from IPython.display import HTML
 #Dataframe final
 
 def get_data():
-    df_kaggle = pd.read_csv('full_dataset.csv')
+    df_kaggle = pd.read_csv('full_dataset_new.csv')
     df_kaggle['year'] = df_kaggle['year'].astype(str)
     return df_kaggle
 
@@ -76,8 +76,23 @@ def filter_sort(genre, decade, popularity, length):
     recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
     return recommended_tracks
 
-def get_name(playlist_name):
-    return playlist_name
+#def get_playlist(genre, decade, popularity, length, playlist_name):
+    #sorted_playlist = filter_sort(genre, decade, popularity, length)
+    #playlist = spotify_client.create_playlist(playlist_name)
+    #playlist_id = playlist.playlist_id
+    ## populate playlist with recommended tracks
+    #tracks_id = sorted_playlist['track_id'].tolist()
+    ##sp.playlist_add_items(playlist_id, tracks_id, position=None)
+    #track_uris = [create_spotify_uri(track) for track in tracks_id]
+    #response = requests.post(
+        #url=f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
+        #data = json.dumps(track_uris),
+        #headers={
+            #"Content-Type": "application/json",
+            #"Authorization": f"Bearer {authorization_token}"
+        #}
+    #)
+    #response = response.json()
 
 
 

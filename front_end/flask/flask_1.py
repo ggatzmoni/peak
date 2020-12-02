@@ -10,7 +10,7 @@ client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
 authorization_token = os.environ.get('authorization_token')
-from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort
+from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort, get_playlist
 from flask_sqlalchemy import SQLAlchemy
 
 import spotipy
@@ -45,10 +45,10 @@ class users(db.Model):
 
 '''define pages on app'''
 # access to page via function decorater - start page
-@app.route("/")
+#@app.route("/")
 # home-app with inline html
-def home():
-    return render_template("index.html")
+#def home():
+    #return render_template("index.html")
 
 # acces to page via parameter
 #@app.route("/<name>")
@@ -59,12 +59,12 @@ def home():
 #redirect to home when on admin page
 
 #create player page
-@app.route("/player", methods=['POST','GET'])
-def player():
-    if request.main == 'POST':
-        msg = request.form.get('msg')
-        print(msg)
-    return render_template("player.html", main=main)
+#@app.route("/player", methods=['POST','GET'])
+#def player():
+    #if request.main == 'POST':
+        #msg = request.form.get('msg')
+        #print(msg)
+    #return render_template("player.html", main=main)
 
 #@app.route("/v1")
 #def v1():
@@ -90,7 +90,7 @@ def error():
 def algo_running():
     return render_template("algo_running.html", length=length, genre=genre, decade=decade, popularity=popularity)
 
-@app.route("/center", methods=["POST","GET"])
+@app.route("/", methods=["POST","GET"])
 def center():
     genres = genre()
     decades = decade()
@@ -118,15 +118,9 @@ def algo_input():
 @app.route("/playlist_input", methods=["POST","GET"])
 def playlist_input():
     if request.method == "POST":
-        playlist_name = request.form.get('playlist_name')
-        #genres = session.get('genre', None)
-        #print(genre)
-
-        return render_template('page_player.html')
-
-
-    return render_template("center.html")
-
+        playlist_name = request.form['playlist_name']
+        return render_template('page_player.html', playlist_name=playlist_name)
+    return redirect("/error")
 
 '''run app'''
 if __name__ == "__main__":
