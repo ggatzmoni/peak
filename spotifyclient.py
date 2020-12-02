@@ -11,6 +11,7 @@ load_dotenv()
 #user_id = os.environ.get('user_id')
 #Import classes from other files
 from playlist import Playlist
+import boto3
 from boto.s3.connection import S3Connection
 user_id = S3Connection(os.environ['user_id'])
 client_id = S3Connection(os.environ['CLIENT_ID'])
