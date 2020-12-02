@@ -9,7 +9,6 @@ load_dotenv()
 client_id = os.environ.get('CLIENT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 user_id = os.environ.get('user_id')
-authorization_token = os.environ.get('authorization_token')
 
 import spotipy
 #Authentication with Spotipy package
@@ -20,11 +19,13 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
                                                scope="playlist-modify-public"))
 
 #Import classes from other files
-from spotifyclient import SpotifyClient
-from track import Track
 
-#from spotifyclient import *
-#from playlist import *
+
+from spotifyclient import *
+authorization_token = generating_access_token()
+
+
+from playlist import *
 
 
 
