@@ -27,7 +27,7 @@ def generating_access_token():
     authorization_token = response['access_token']
     return authorization_token
 
-authorization_token = generating_access_token()
+#authorization_token = generating_access_token()
 
 class SpotifyClient:
     """SpotifyClient performs operations using the Spotify API."""
