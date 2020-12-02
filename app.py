@@ -5,10 +5,15 @@ from werkzeug.datastructures import ImmutableMultiDict
 from dotenv import load_dotenv
 import os
 load_dotenv()
-client_id = os.environ.get('CLIENT_ID')
-client_secret = os.environ.get('CLIENT_SECRET')
-user_id = os.environ.get('user_id')
-authorization_token = os.environ.get('authorization_token')
+import boto
+from boto.s3.connection import S3Connection
+client_id = S3Connection(os.environ['CLIENT_ID'])
+client_secret = S3Connection(os.environ['CLIENT_SECRET'])
+redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
+#client_id = os.environ.get('CLIENT_ID')
+#client_secret = os.environ.get('CLIENT_SECRET')
+#user_id = os.environ.get('user_id')
+#authorization_token = os.environ.get('authorization_token')
 from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort
 
 import spotipy
