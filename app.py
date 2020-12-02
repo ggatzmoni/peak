@@ -20,7 +20,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
                                                scope="playlist-modify-public"))
 
 #Import classes from other files
-#from spotifyclient import *
+#
+from spotifyclient import *
 
 '''instance flask web application'''
 app = Flask(__name__)
