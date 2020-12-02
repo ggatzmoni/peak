@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <link rel="stylesheet" href="styles/debug.css">
+    <style>
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-responsive { 
+  display: block;       max-width: 100%;       height: auto; 
+}
+.hero {
+  background: url(static/bell2.svg) center / cover;
+}
+
+    </style>
+  </head>
+<body>
+<nav class="hero-head is-large">
+  <div class="columns is-marginless is-right heading has-text-weight-bold has-background-black">
+        <a class="navbar-item" href="https://bulma.io">
+      <img src="static/logo.png" width="100" height="28">
+    </a>
+  </div>
+</nav>
+<div class="modal-is active has-background-black">
+  <div class="modal has-background-black"></div>
+  <div class="modal-content">
+    <p class="image">
+      <img src="static/logo.png" alt="">
+    </p>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+    <!-- .section -->
+  <section class="section has-background-black">
+    <!img class="img-responsive" src="static/bell2.svg"/>
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5 bd-notification is-primary">
+                <div class="dropdown is-active">
+                  <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                      <span>Genre</span>
+                      <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                    <div class="dropdown-content">
+                      <a href="#" class="dropdown-item">
+                        Techno
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        Reggae
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        Classic
+                      </a>
+                      <hr class="dropdown-divider">
+                      <a href="#" class="dropdown-item">
+                        More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+          <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5">
+                <div class="dropdown has-background-black">
+                  <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                      <span>Decade</span>
+                      <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                    <div class="dropdown-content">
+                      <a href="#" class="dropdown-item">
+                        2010
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        2000
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        1990
+                      </a>
+                      <hr class="dropdown-divider">
+                      <a href="#" class="dropdown-item">
+                        More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5">
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                      <span>Country</span>
+                      <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                    <div class="dropdown-content">
+                      <a href="#" class="dropdown-item">
+                        UK
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        US
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        Belgium
+                      </a>
+                      <hr class="dropdown-divider">
+                      <a href="#" class="dropdown-item">
+                        More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container has-text-centered">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="notification has-background-black">
+              <p class="is-size-5">
+                <div class="dropdown">
+                  <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                      <span>Length</span>
+                      <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                    <div class="dropdown-content">
+                      <a href="#" class="dropdown-item">
+                        30
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        60
+                      </a>
+                      <a href="#" class="dropdown-item">
+                        90
+                      </a>
+                      <hr class="dropdown-divider">
+                      <a href="#" class="dropdown-item">
+                       More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </img>
+  </section>
+  <footer class="footer d-flex align-items-center justify-content-end p-4 has-background-black color-white">
+    <div class="content has-text-right has-text-white">
+      <p>Made with ❤️ @
+        <a href="https://www.lewagon.com" target="_blank">
+          <img src="static/lewagon_white.png" alt="" width=80>
+        </a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
