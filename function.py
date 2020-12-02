@@ -1,5 +1,5 @@
 def genre():
-    return ['Rock', 'Soul', 'Pop', 'Classical', 'Rap', 'Jazz', 'Hip-Hop', 'Folk', 'Funk', 'Country', 'Techno', 'House']
+    return ['Rock', 'Soul', 'Pop', 'Classical', 'Rap', 'Jazz', 'Hip Hop', 'Folk', 'Funk', 'Country', 'Techno', 'House']
 
 def decade():
     return ["'20", "'30", "'40","'50","'60", "'70", "'80", "'90", "'00", "'10"]

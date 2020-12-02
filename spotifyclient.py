@@ -6,26 +6,25 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 load_dotenv()
-#client_id = os.environ.get('CLIENT_ID')
-#client_secret = os.environ.get('CLIENT_SECRET')
-#user_id = os.environ.get('user_id')
-#redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
-#refresh_token = os.environ.get('refresh_token')
+
+if is_prod:
+    import boto3
+    from boto.s3.connection import S3Connection
+    user_id = S3Connection(os.environ['user_id'])
+    client_id = S3Connection(os.environ['CLIENT_ID'])
+    client_secret = S3Connection(os.environ['CLIENT_SECRET'])
+    redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
+    refresh_token = S3Connection(os.environ['refresh_token'])
+else:
+    client_id = os.environ.get('CLIENT_ID')
+    client_secret = os.environ.get('CLIENT_SECRET')
+    user_id = os.environ.get('user_id')
+    redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
+    refresh_token = os.environ.get('refresh_token')
+
 #Import classes from other files
 from playlist import Playlist
-#import boto3
-#from boto.s3.connection import S3Connection
-#user_id = S3Connection(os.environ['user_id'])
-#client_id = S3Connection(os.environ['CLIENT_ID'])
-#client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-#redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
-#refresh_token = S3Connection(os.environ['refresh_token'])
 
-client_id="5f88691d8f354fa39ec134df51aa5993"
-client_secret="e7b04bcef93e45feb480491c2eb4d744"
-refresh_token="AQBubjua2E0tmTRjSB8nNPXYG8wpEomRqt8zK-KsMnEOO1DnWxJ3Z1WeCxdrWNrG7Y_B4O0ENxnYYXxwReTxrfT22CtE3HHncthnAGTmDRkDbovB7luN_-v6xsOcvcok-Do"
-redirect="https://peak-music.herokuapp.com"
-user_id='ucsjsq93kh2319qyrsk4atloa'
 
 ##Added this function here
 def generating_access_token():

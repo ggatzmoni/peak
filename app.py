@@ -6,28 +6,26 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-#is_prod = os.environ.get('IS_HEROKU', None)
-#if is_prod:
-    #import boto
-    #from boto.s3.connection import S3Connection
-    #client_id = S3Connection(os.environ['CLIENT_ID'])
-    #client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-    #redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
-#else:
-    #from spotifyclient import *
-    #client_id = os.environ.get('CLIENT_ID')
-    #client_secret = os.environ.get('CLIENT_SECRET')
-    #user_id = os.environ.get('user_id')
-    #authorization_token = generating_access_token()
+import boto
+conn = boto.connect_s3()
 
-client_id="5f88691d8f354fa39ec134df51aa5993"
-client_secret="e7b04bcef93e45feb480491c2eb4d744"
-refresh_token="AQBubjua2E0tmTRjSB8nNPXYG8wpEomRqt8zK-KsMnEOO1DnWxJ3Z1WeCxdrWNrG7Y_B4O0ENxnYYXxwReTxrfT22CtE3HHncthnAGTmDRkDbovB7luN_-v6xsOcvcok-Do"
-redirect="https://peak-music.herokuapp.com"
-user_id='ucsjsq93kh2319qyrsk4atloa'
+is_prod = conn(os.environ['IS_HEROKU'])
+print(is_prod)
+if is_prod:
+    import boto
+    from boto.s3.connection import S3Connection
+    client_id = S3Connection(os.environ['CLIENT_ID'])
+    client_secret = S3Connection(os.environ['CLIENT_SECRET'])
+    redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
+else:
+    from spotifyclient import *
+    client_id = os.environ.get('CLIENT_ID')
+    client_secret = os.environ.get('CLIENT_SECRET')
+    user_id = os.environ.get('user_id')
+    authorization_token = generating_access_token()
 
 
-from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort
+from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort, get_tracks_id, get_playlist_id, add_items_to_playlist
 
 import spotipy
 #Authentication with Spotipy package

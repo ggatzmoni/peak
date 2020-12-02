@@ -6,30 +6,27 @@ from sklearn.neighbors import KNeighborsRegressor
 from dotenv import load_dotenv
 import os
 load_dotenv()
-#import boto3
-#from boto.s3.connection import S3Connection
-#client_id = S3Connection(os.environ['CLIENT_ID'])
-#client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-#redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
-#client_id = os.environ.get('CLIENT_ID')
-#client_secret = os.environ.get('CLIENT_SECRET')
-#user_id = os.environ.get('user_id')
+
+is_prod = os.environ.get('IS_HEROKU', None)
+if is_prod:
+    import boto3
+    from boto.s3.connection import S3Connection
+    client_id = S3Connection(os.environ['CLIENT_ID'])
+    client_secret = S3Connection(os.environ['CLIENT_SECRET'])
+    redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
+    user_id = S3Connection(os.environ['user_id'])
+else:
+    client_id = os.environ.get('CLIENT_ID')
+    client_secret = os.environ.get('CLIENT_SECRET')
+    user_id = os.environ.get('user_id')
+    redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
 #Import classes from other files
-
-client_id="5f88691d8f354fa39ec134df51aa5993"
-client_secret="e7b04bcef93e45feb480491c2eb4d744"
-refresh_token="AQBubjua2E0tmTRjSB8nNPXYG8wpEomRqt8zK-KsMnEOO1DnWxJ3Z1WeCxdrWNrG7Y_B4O0ENxnYYXxwReTxrfT22CtE3HHncthnAGTmDRkDbovB7luN_-v6xsOcvcok-Do"
-redirect="https://peak-music.herokuapp.com"
-user_id='ucsjsq93kh2319qyrsk4atloa'
-
 
 from spotifyclient import *
 authorization_token = generating_access_token()
 
 
 from playlist import *
-
-
 
 '''updates michiel'''
 from IPython.display import HTML
@@ -50,7 +47,11 @@ def filter_data(genre, decade, popularity, length):
 
 def get_seed(genre, decade, popularity, length):
     filtered_results = filter_data(genre, decade, popularity, length)
-    seed = filtered_results.sample(1)
+    if genre == "Classical":
+        seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f"'{genre}',"))]
+    else:
+        seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f", {genre},"))]
+    seed = seeds.sample(1)
     tempo = seed['scaled_tempo'].iat[0]
     loudness = seed['scaled_loudness'].iat[0]
     da = seed['danceability'].iat[0]
