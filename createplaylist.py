@@ -44,7 +44,7 @@ def filter_data(genre, decade, length, popularity):
 
 def get_seed(genre, decade, length, popularity):
     filtered_results = filter_data(genre, decade, length, popularity)
-    if genre == "Classical":
+    if genre == "Classical" or genre == "Techno":
         seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f"'{genre}',"))]
     else:
         seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f", {genre},"))]
