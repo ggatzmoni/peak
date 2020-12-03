@@ -70,7 +70,7 @@ def train_model(genre, decade, length, popularity):
     model = fit_model(genre, decade, length, popularity)
     seed, tempo, da, energy = get_seed(genre, decade, length, popularity)
     filtered_results = filter_data(genre, decade, length, popularity)
-    knn_out, k = [], (len(filtered_results) if len(filtered_results)<100 else 100)
+    knn_out, k = [], (len(filtered_results)-1 if len(filtered_results)<100 else 100)
     knn_out = model.kneighbors([[tempo,da,energy]], n_neighbors=k)
     ind = knn_out[1][0].tolist() # get indices
     recs = filtered_results.iloc[ind] # recommendations df

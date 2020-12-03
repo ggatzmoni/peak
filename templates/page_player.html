@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: hsl(0, 0%, 4%)">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,22 +37,99 @@
     text-align: left;
 }
 
+.wrapperlt {
+            position: absolute;
+            left: 5;
+        }
+.wrapperlt div {
+            position: relative;
+            padding: -10px;
+            background: yellow;
+            left: -20%;
+        }
+.card-heading {
+  color: rgb(248, 247, 222);
+  font-size: 300px;
+}
+
+.wrapperrt {
+            position: absolute;
+            left: 100;
+        }
+.wrapperrt div {
+            position: relative;
+            padding: 300px;
+            background: yellow;
+            left: -20%;
+        }
+.card-heading {
+  color: rgb(248, 247, 222);
+  font-size: 200px;
+}
+
+.wrapperld {
+            position: absolute;
+            left: 100;
+        }
+.wrapperld div {
+            position: relative;
+            padding: 600px;
+            background: yellow;
+            left: -20%;
+        }
+.card-heading {
+  color: rgb(248, 247, 222);
+  font-size: 200px;
+}
+
 </style>
 
 <body>
-  <div class="section-select">
-  <figure class="image has-background-black">
-    <img src="static/curve_bitmapped.png" style="width:800px;height:600px;" class="center">
-  </figure>
+  <section>
+    <div class="columns is-vcentered">
+      <div class="wrapperlt">
+        <h1 class=card-heading>{{popularity}}</h1>
+      </div>
+    </div>
+      <div class="wrapperrt" style="padding-top:25px">
+        <h1 class=card-heading>{{length}}</h1>
+      </div>
+    </div>
+      <div class="wrapperrt" style="padding-top:185px">
+        <h1 class=card-heading>{{genre}}</h1>
+      </div>
+    </div>
+    </div>
+      <div class="wrapperrt" style="padding-top:370px">
+        <h1 class=card-heading>{{decade}}</h1>
+      </div>
+    </div>
+    </div>
+      <div class="wrapperrt" style="padding-top:550px">
+        <h1 class=card-heading>{{playlist_name}}</h1>
+      </div>
+    </div>
+  </section>
+  </div>
+ <div class="columns is-vcentered is-12 has-background-black">
+    <div class="section-select is-vcentered">
+      <figure class="image-select has-background-black">
+        <img src="static/peaklogocurve_2.png" style="width:800px;height:600px;" class="center">
+      </figure>
+    </div>
+    <div class="section-select is-vcentered has-background-black">
+      <a> <iframe src="https://open.spotify.com/embed/playlist/{{widget}}" width="300" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
+    </div>
+  </div>
 </body>
 
 <!-- .hero -->
   <!-- /.hero -->
-      <div class="modal is-active is-primary">
+      <!--div class="modal is-active is-primary">
         <article class="message is-medium has-background-black">
-          <a> <iframe src="https://open.spotify.com/embed/playlist/{{widget}}" width="300" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
+          <a> <iframe src="https://open.spotify.com/embed/playlist/{{widget}}" width="300" height="200" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
         </article>
-      </div>
+      </div-->
    </section>
     <section class="hero-foot">
       <section class="section has-background-black">

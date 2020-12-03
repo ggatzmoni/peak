@@ -66,8 +66,12 @@ def playlist():
 @app.route("/page_player", methods=["POST","GET"])
 def page_player():
     widget = session.get('playlist_id_widget')
-    print(widget)
-    return render_template("page_player.html", widget=widget)
+    genre = session.get('genre')
+    decade = session.get('decade')
+    length = session.get('length')
+    popularity = session.get('popularity')
+    playlist_name = session.get('playlist_name')
+    return render_template("page_player.html", widget=widget, genre=genre, decade=decade, length=length, popularity=popularity, playlist_name=playlist_name)
 
 @app.route("/error", methods=["POST","GET"])
 def error():
@@ -97,6 +101,11 @@ def algo_input():
             return redirect("/error")
         playlist_id = get_playlist_id(playlist_name)
         session['playlist_id_widget'] = playlist_id
+        session['genre'] = genre
+        session['decade'] = decade
+        session['length'] = length
+        session['popularity'] = popularity
+        session['playlist_name'] = playlist_name
         add_items_to_playlist(genre, decade, length, popularity, playlist_name, playlist_id)
         return redirect("/page_player")
 
