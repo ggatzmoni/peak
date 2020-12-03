@@ -62,11 +62,6 @@
             background: yellow;
             left: -20%;
         }
-.card-heading {
-  color: rgb(248, 247, 222);
-  font-size: 200px;
-}
-
 .wrapperld {
             position: absolute;
             left: 100;
@@ -77,48 +72,66 @@
             background: yellow;
             left: -20%;
         }
-.card-heading {
-  color: rgb(248, 247, 222);
+.card-heading1 {
+  color: rgb(101, 43, 117);
   font-size: 200px;
+  font-family: Helvetica;
 }
-
+.card-heading2 {
+  color: rgb(42, 198, 185);
+  font-size: 200px;
+  font-family: Helvetica;
+}
+.card-heading3 {
+  color: rgb(230, 231, 125);
+  font-size: 200px;
+  font-family: Helvetica;
+}
+.card-heading4 {
+  color: rgb(241, 31, 80);
+  font-size: 200px;
+  font-family: Helvetica;
+}
+.card-heading5 {
+  color: rgb(248, 150, 61);
+  font-size: 200px;
+  font-family: Helvetica;
+}
+.section-select {
+  padding: 200px 200px 200px 800px;
+}
 </style>
 
 <body>
   <section>
     <div class="columns is-vcentered">
       <div class="wrapperlt">
-        <h1 class=card-heading>{{popularity}}</h1>
+        <h1 class=card-heading1>{{playlist_name}}</h1>
       </div>
     </div>
-      <div class="wrapperrt" style="padding-top:25px">
-        <h1 class=card-heading>{{length}}</h1>
+      <div class="wrapperrt" style="padding-top:10px">
+        <h1 class=card-heading2>{{length}}</h1>
       </div>
     </div>
       <div class="wrapperrt" style="padding-top:185px">
-        <h1 class=card-heading>{{genre}}</h1>
+        <h1 class=card-heading3>{{genre}}</h1>
       </div>
     </div>
     </div>
-      <div class="wrapperrt" style="padding-top:370px">
-        <h1 class=card-heading>{{decade}}</h1>
+      <div class="wrapperrt" style="padding-top:365px">
+        <h1 class=card-heading4>{{decade}}</h1>
       </div>
     </div>
     </div>
       <div class="wrapperrt" style="padding-top:550px">
-        <h1 class=card-heading>{{playlist_name}}</h1>
+        <h1 class=card-heading5>{{popularity}}</h1>
       </div>
     </div>
   </section>
   </div>
- <div class="columns is-vcentered is-12 has-background-black">
-    <div class="section-select is-vcentered">
-      <figure class="image-select has-background-black">
-        <img src="static/peaklogocurve_2.png" style="width:800px;height:600px;" class="center">
-      </figure>
-    </div>
+ <div class="columns is-12 has-background-black">
     <div class="section-select is-vcentered has-background-black">
-      <a> <iframe src="https://open.spotify.com/embed/playlist/{{widget}}" width="300" height="300" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
+      <a> <iframe src="https://open.spotify.com/embed/playlist/{{widget}}" width="300" height="350" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
     </div>
   </div>
 </body>
@@ -134,10 +147,10 @@
     <section class="hero-foot">
       <section class="section has-background-black">
       <div>
-        <div class="content has-text-right has-text-white is-2" style="margin-top: -40px">
+        <div class="content has-text-right has-text-white is-2" style="margin-top: -120px">
             <a href="https://www.lewagon.com" target="_blank">
-              <img src="static/logo_lewagon_red.png"  style="margin-top: -40px" alt="" width=20>
-              <img src="static/lewagon_white.png"  style="margin-top: -40px" alt="" width=60>
+              <img src="static/logo_lewagon_red.png"  style="margin-top: -120px" alt="" width=20>
+              <img src="static/lewagon_white.png"  style="margin-top: -120px" alt="" width=60>
             </a>
         </div>
       </div>
