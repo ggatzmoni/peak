@@ -19,29 +19,13 @@ else:
     redirect = os.getenv('SPOTIPY_REDIRECT_URI')
 
 
-from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort, get_tracks_id, get_playlist_id, add_items_to_playlist
+from createplaylist import *
 from spotifyclient import *
 
-import spotipy
-#Authentication with Spotipy package
-from spotipy.oauth2 import SpotifyOAuth
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id= client_id,
-                                               client_secret=client_secret,
-                                               redirect_uri=redirect, #replace with our website url
-                                               scope="playlist-modify-public"))
-
-#Import classes from other files
-#
 
 '''instance flask web application'''
 app = Flask(__name__)
-
-#config parameters database
-
-
-
-'''create DB'''
-
+#app.secret_key = "qsdfghjklm"
 
 '''define pages on app'''
 # access to page via function decorater - start page
@@ -80,7 +64,8 @@ def playlist():
 
 @app.route("/page_player", methods=["POST","GET"])
 def page_player():
-    return render_template("page_player.html", length=length, genre=genre, decade=decade, popularity=popularity)
+    #widget = session.get('playlist_id_widget', None)
+    return render_template("page_player.html")
 
 @app.route("/error", methods=["POST","GET"])
 def error():
@@ -104,24 +89,27 @@ def center():
 def algo_input():
     if request.method == "POST":
         req = request.form
-        genre, decade, length, popularity = req.values()
+        genre, decade, length, popularity, playlist_name = req.values()
         #specify function to input front-end and return html page
         if filter_data(genre, decade, popularity, length) is False:
             return redirect("/error")
-        result = filter_sort(genre, decade, popularity, length)
+        playlist_id = get_playlist_id(playlist_name)
+        #session['playlist_id_widget'] = playlist_id[0:21]
+        add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id)
         #session['genre'] = 'rock'
-        return render_template('algo_running.html', length=length, genre=genre, decade=decade, popularity=popularity)  #redirect('/algo_running'
+        return render_template('page_player.html', length=length, genre=genre, decade=decade, popularity=popularity, playlist_name=playlist_name, playlist_id=playlist_id)#, playlist_id_widget=playlist_id_widget)  #redirect('/algo_running'
 
     return render_template("center.html")
 
-@app.route("/playlist_input", methods=["POST","GET"])
-def playlist_input():
-    if request.method == "POST":
-        playlist_req= request.form['playlist_name']
-        playlist_name = get_playlist_id(playlist_req)
-        add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id)
-        return render_template('page_player.html', playlist_name=playlist_name)
-    return redirect("/error")
+#@app.route("/playlist_input", methods=["POST","GET"])
+#def playlist_input():
+    #if request.method == "POST":
+        #playlist_req = request.form['playlist_name']
+        #playlist_id = get_playlist_id(playlist_req)
+        #spoti = add_items_to_playlist(genre, decade, popularity, length, playlist_req, playlist_id)
+        #print(spoti)
+        #return render_template('page_player.html', playlist_name=playlist_name)
+    #return redirect("/error")
 
 '''run app'''
 if __name__ == "__main__":

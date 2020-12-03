@@ -23,7 +23,6 @@ else:
 from spotifyclient import *
 authorization_token = generating_access_token()
 
-
 from playlist import *
 
 '''updates michiel'''
@@ -95,14 +94,14 @@ def get_tracks_id(genre, decade, popularity,length):
     return tracks_id
 
 def get_playlist_id(playlist_name):
-    playlist = create_playlist(playlist_name)
-    playlist_id = playlist.playlist_id
+    playlist_id = create_playlist2(playlist_name)
+    #playlist_id = playlist.playlist_id
     return playlist_id
 
 def add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id):
 ## populate playlist with recommended tracks
     tracks_id = get_tracks_id(genre, decade, popularity, length)
-    track_uris = [create_spotify_uri(track) for track in tracks_id]
+    track_uris = [create_spotify_uri2(track) for track in tracks_id]
     playlist_id = get_playlist_id(playlist_name)
     response = requests.post(
         url=f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
@@ -114,79 +113,3 @@ def add_items_to_playlist(genre, decade, popularity, length, playlist_name, play
     )
     response = response.json()
     return response
-
-'''
-#Will be replaced by preprocessing pipeline
-def formatting(df):
-    df['genres'] = df['genres'].astype(str)
-    df['duration_min'] = (df['duration_ms']/60000).astype(int)
-    df['decades'] = pd.cut(x=df['year'], bins=[1920, 1930, 1940, 1950,1960,1970,1980,1990,2000,2010,2020])
-    df['year'] = df['year'].astype(str)
-    return df
-
-#Display user input as a list of choices
-def get_choice(df, column):
-
-    #Gets user choice
-    nums = [val for val in range(len(df[column].unique()))]
-    choices = list(zip(nums, df[column].unique()))
-    print("Select '%s'\n" % column)
-    for v in choices:
-        print("%s.  %s" % (v))
-    user_input = input("Answer: ")
-    user_answer = [val[1] for val in choices if val[0]==int(user_input)][0]
-    print("'%s' = %s\n" % (column, user_answer))
-    return user_answer
-
-#def getparam(genre, decade, length, popularity):
-    #playlist = [genre, decade, length, popularity]
-    #return playlist
-
-# get filtered data for html
-
-def main():
-    spotify_client = SpotifyClient(authorization_token,user_id)
-
-    #Asking users for their preferences
-    query_genre=input("Which genre?\n>")
-    query_pop = input("Popularity? 0 and 100, with 100 being the most popular\n> ")
-    query_decade = get_choice(df=get_data(), column="decades")
-    query_duration = input("Duration of the playlist?\n> ")
-    print(f" You selected {query_genre} tracks with a popularity of {query_pop}% from the {query_decade} decade for a total duration of {query_duration} minutes")
-
-    #Converting to the right type
-    query_pop = int(query_pop)
-    query_duration = int(query_duration)
-    query_decade = str(query_decade)
-    query_genre = str(query_genre)
-
-    #filtering the dataset accordingly
-    df_kaggle = get_data()
-    filtered_genre = df_kaggle[df_kaggle['genres'].str.contains(query_genre)]
-    filtered_results = filtered_genre[(filtered_genre['year'].str.contains(query_decade[1:3])) & (filtered_genre['popularity'] == query_pop)]
-
-    # Select 1 random track seed from the filtered_results
-    # Insert here the recommendation algorythm from Luam
-
-    # (filtered_results will be replaced by the name of Luam's output dataframe)
-    filtered_duration = filtered_results[filtered_results['duration_min'].cumsum() <= query_duration]
-    recommended_playlist = filtered_duration.reset_index(drop=True)
-    recommended_tracks = recommended_playlist[['track_name','track_id','artists']]
-    print(recommended_tracks)
-
-
-    # get playlist name from user and create playlist
-    playlist_name = input("\nWhat's the playlist name? ")
-    playlist_name = str(playlist_name)
-    playlist = spotify_client.create_playlist(playlist_name)
-    playlist_id =playlist.id
-    print(f"\nPlaylist '{playlist.name}' was created successfully.")
-
-    # populate playlist with recommended tracks
-    tracks_id = recommended_playlist['track_id'].tolist()
-    sp.playlist_add_items(playlist_id, tracks_id, position=None)
-    print(f"\nRecommended tracks successfully uploaded to playlist '{playlist_name}'.")
-
-if __name__ == "__main__":
-    main()
-'''

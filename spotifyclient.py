@@ -21,11 +21,10 @@ else:
     user_id = os.getenv('user_id')
     redirect = os.getenv('SPOTIPY_REDIRECT_URI')
     refresh_token = os.getenv('refresh_token')
-    print(client_secret)
-    print(refresh_token)
 
 #Import classes from other files
 from playlist import Playlist
+
 
 
 ##Added this function here
@@ -43,6 +42,30 @@ def generating_access_token():
     authorization_token = response['access_token']
     return authorization_token
 authorization_token = generating_access_token()
+
+def create_playlist2(playlist_name):
+    authorization_token = generating_access_token()
+    user_id = os.getenv('user_id')
+    response = requests.post(
+            f"https://api.spotify.com/v1/users/{user_id}/playlists",
+            json.dumps({
+            "name": playlist_name,
+            "description": "Recommended songs by Peak",
+            "public": True
+        }),
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {authorization_token}"
+            }
+        )
+    response_json = response.json()
+    playlist_id = response_json["id"]
+        # create playlist from the class in playlist.py
+    #playlist = Playlist(playlist_name, playlist_id)
+    return playlist_id
+
+def create_spotify_uri2(track_id):
+    return f"spotify:track:{track_id}"
 
 class SpotifyClient:
     """SpotifyClient performs operations using the Spotify API."""
