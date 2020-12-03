@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: hsl(0, 0%, 4%)">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,6 +64,8 @@
   text-align-last:center;
 
 }
+.body {   background-color: black; 
+          height: 300vh; }
 
   .custom-button {
   font-family: Arial;
@@ -79,10 +81,6 @@
 
 }
 
-.has-background-select {
-    background-image: url(static/background_grain.jpeg);
-}
-
 .image-select {
 padding: 0px, 50px;
 }
@@ -90,10 +88,10 @@ padding: 0px, 50px;
 </style>
 
 <body>
-    <section class = "hero is-medium has-background-select">
-      <div class="hero-body is-right">
-        <figure class="image-select right">
-          <img src="static/peaklogo.png" sty@le="top: 560px;">
+    <section class = "hero is-medium has-background-black">
+      <div class="hero-body is-right has-background-black">
+        <figure class="image right has-background-black">
+          <img src="static/peaklogo_2.png">
         </figure>
       </div>
     </section>
@@ -101,7 +99,7 @@ padding: 0px, 50px;
 
     <!-- .section -->
 <section class="hero-foot">
-  <section class="section has-background-select">
+  <section class="section has-background-black">
     <form action="/algo_input" method="POST">
       <div class="container has-text-centered">
         <div class="columns is-vcentered is-10">
@@ -153,7 +151,7 @@ padding: 0px, 50px;
               </select>
             </div>
           </div>
-          <div class="field is-active column is-vcentered is-black" style="margin-top: -70px">
+          <div class="field is-active column is-2 is-vcentered is-black" style="margin-top: -70px">
               <input class="input has-text-centered has-text-black" type="text" placeholder="Please specify your playlist name" name="playlist_name">
           </div>
           <div class="column is-active is-active is-2" style="margin-top: -85px">

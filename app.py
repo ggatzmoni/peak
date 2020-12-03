@@ -11,12 +11,12 @@ if is_prod:
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
     user_id = os.environ.get('user_id')
-    redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
+    redirect_uri = os.environ.get('SPOTIPY_REDIRECT_URI')
 else:
     client_id = os.getenv('CLIENT_ID')
     client_secret = os.getenv('CLIENT_SECRET')
     user_id = os.getenv('user_id')
-    redirect = os.getenv('SPOTIPY_REDIRECT_URI')
+    redirect_uri = os.getenv('SPOTIPY_REDIRECT_URI')
 
 
 from createplaylist import *
@@ -25,7 +25,8 @@ from spotifyclient import *
 
 '''instance flask web application'''
 app = Flask(__name__)
-#app.secret_key = "qsdfghjklm"
+app.secret_key = "qsdfghjklm"
+#app.config["SECRET_KEY"] = "qsdfghjklm"
 
 '''define pages on app'''
 # access to page via function decorater - start page
@@ -64,8 +65,9 @@ def playlist():
 
 @app.route("/page_player", methods=["POST","GET"])
 def page_player():
-    #widget = session.get('playlist_id_widget', None)
-    return render_template("page_player.html")
+    widget = session.get('playlist_id_widget')
+    print(widget)
+    return render_template("page_player.html", widget=widget)
 
 @app.route("/error", methods=["POST","GET"])
 def error():
@@ -94,10 +96,9 @@ def algo_input():
         if filter_data(genre, decade, length, popularity) is False:
             return redirect("/error")
         playlist_id = get_playlist_id(playlist_name)
-        #session['playlist_id_widget'] = playlist_id[0:21]
+        session['playlist_id_widget'] = playlist_id
         add_items_to_playlist(genre, decade, length, popularity, playlist_name, playlist_id)
-        #session['genre'] = 'rock'
-        return render_template('page_player.html', length=length, genre=genre, decade=decade, popularity=popularity, playlist_name=playlist_name)#, playlist_id=playlist_id)#, playlist_id_widget=playlist_id_widget)  #redirect('/algo_running'
+        return redirect("/page_player")
 
     return render_template("error.html")
 

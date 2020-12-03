@@ -12,12 +12,12 @@ if is_prod:
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
     user_id = os.environ.get('user_id')
-    redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
+    redirect_uri = os.environ.get('SPOTIPY_REDIRECT_URI')
 else:
     client_id = os.getenv('CLIENT_ID')
     client_secret = os.getenv('CLIENT_SECRET')
     user_id = os.getenv('user_id')
-    redirect = os.getenv('SPOTIPY_REDIRECT_URI')
+    redirect_uri = os.getenv('SPOTIPY_REDIRECT_URI')
 #Import classes from other files
 
 from spotifyclient import *

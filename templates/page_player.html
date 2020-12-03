@@ -17,9 +17,6 @@
   margin-right: auto;
   width: 50%;
 }
-.has-background-select {
-    background-image: url(static/background_grain.jpeg);
-}
 .modal {
   position: absolute;
   top: 40%;
@@ -44,24 +41,21 @@
 
 <body>
   <div class="section-select">
-  <figure class="image-select has-background-select">
+  <figure class="image has-background-black">
     <img src="static/curve_bitmapped.png" style="width:800px;height:600px;" class="center">
   </figure>
 </body>
 
 <!-- .hero -->
-  <section class="hero"></section>
-
   <!-- /.hero -->
       <div class="modal is-active is-primary">
-        <!--h1> {{widget}} </h1-->
-        <article class="message is-medium has-background-select">
-          <a> <iframe src="https://open.spotify.com/playlist/1PXq4AORqkTN5f1pGmsZu9" width="300" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
+        <article class="message is-medium has-background-black">
+          <a> <iframe src="https://open.spotify.com/embed/playlist/{{widget}}" width="300" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></a>
         </article>
       </div>
    </section>
     <section class="hero-foot">
-      <section class="section has-background-select">
+      <section class="section has-background-black">
       <div>
         <div class="content has-text-right has-text-white is-2" style="margin-top: -40px">
             <a href="https://www.lewagon.com" target="_blank">
