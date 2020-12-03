@@ -9,17 +9,15 @@ load_dotenv()
 
 is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod:
-    import boto3
-    from boto.s3.connection import S3Connection
-    client_id = S3Connection(os.environ['CLIENT_ID'])
-    client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-    redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
-    user_id = S3Connection(os.environ['user_id'])
-else:
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
     user_id = os.environ.get('user_id')
     redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
+else:
+    client_id = os.getenv('CLIENT_ID')
+    client_secret = os.getenv('CLIENT_SECRET')
+    user_id = os.getenv('user_id')
+    redirect = os.getenv('SPOTIPY_REDIRECT_URI')
 #Import classes from other files
 
 from spotifyclient import *
@@ -97,7 +95,7 @@ def get_tracks_id(genre, decade, popularity,length):
     return tracks_id
 
 def get_playlist_id(playlist_name):
-    playlist = spotify_client.create_playlist(playlist_name)
+    playlist = create_playlist(playlist_name)
     playlist_id = playlist.playlist_id
     return playlist_id
 

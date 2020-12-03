@@ -7,20 +7,22 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+
+is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod:
-    import boto3
-    from boto.s3.connection import S3Connection
-    user_id = S3Connection(os.environ['user_id'])
-    client_id = S3Connection(os.environ['CLIENT_ID'])
-    client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-    redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
-    refresh_token = S3Connection(os.environ['refresh_token'])
-else:
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
     user_id = os.environ.get('user_id')
     redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
     refresh_token = os.environ.get('refresh_token')
+else:
+    client_id = os.getenv('CLIENT_ID')
+    client_secret = os.getenv('CLIENT_SECRET')
+    user_id = os.getenv('user_id')
+    redirect = os.getenv('SPOTIPY_REDIRECT_URI')
+    refresh_token = os.getenv('refresh_token')
+    print(client_secret)
+    print(refresh_token)
 
 #Import classes from other files
 from playlist import Playlist

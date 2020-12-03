@@ -6,26 +6,21 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-import boto
-conn = boto.connect_s3()
-
-is_prod = conn(os.environ['IS_HEROKU'])
-print(is_prod)
+is_prod = os.environ.get('IS_HEROKU', None)
 if is_prod:
-    import boto
-    from boto.s3.connection import S3Connection
-    client_id = S3Connection(os.environ['CLIENT_ID'])
-    client_secret = S3Connection(os.environ['CLIENT_SECRET'])
-    redirect = S3Connection(os.environ['SPOTIPY_REDIRECT_URI'])
-else:
-    from spotifyclient import *
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
     user_id = os.environ.get('user_id')
-    authorization_token = generating_access_token()
+    redirect = os.environ.get('SPOTIPY_REDIRECT_URI')
+else:
+    client_id = os.getenv('CLIENT_ID')
+    client_secret = os.getenv('CLIENT_SECRET')
+    user_id = os.getenv('user_id')
+    redirect = os.getenv('SPOTIPY_REDIRECT_URI')
 
 
 from createplaylist import filter_data, get_seed, fit_model, train_model, filter_sort, get_tracks_id, get_playlist_id, add_items_to_playlist
+from spotifyclient import *
 
 import spotipy
 #Authentication with Spotipy package
@@ -122,8 +117,8 @@ def algo_input():
 @app.route("/playlist_input", methods=["POST","GET"])
 def playlist_input():
     if request.method == "POST":
-        playlist_name = request.form['playlist_name']
-        get_playlist_id(playlist_name)
+        playlist_req= request.form['playlist_name']
+        playlist_name = get_playlist_id(playlist_req)
         add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id)
         return render_template('page_player.html', playlist_name=playlist_name)
     return redirect("/error")
