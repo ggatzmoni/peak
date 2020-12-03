@@ -71,9 +71,9 @@ def page_player():
 def error():
     return render_template("experiment.html")
 
-@app.route("/algo_running", methods=["POST","GET"])
-def algo_running():
-    return render_template("algo_running.html", length=length, genre=genre, decade=decade, popularity=popularity)
+#@app.route("/algo_running", methods=["POST","GET"])
+#def algo_running():
+    #return render_template("algo_running.html", length=length, genre=genre, decade=decade, popularity=popularity)
 
 @app.route("/", methods=["POST","GET"])
 def center():
@@ -97,9 +97,9 @@ def algo_input():
         #session['playlist_id_widget'] = playlist_id[0:21]
         add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id)
         #session['genre'] = 'rock'
-        return render_template('page_player.html', length=length, genre=genre, decade=decade, popularity=popularity, playlist_name=playlist_name, playlist_id=playlist_id)#, playlist_id_widget=playlist_id_widget)  #redirect('/algo_running'
+        return render_template('page_player.html', length=length, genre=genre, decade=decade, popularity=popularity, playlist_name=playlist_name)#, playlist_id=playlist_id)#, playlist_id_widget=playlist_id_widget)  #redirect('/algo_running'
 
-    return render_template("center.html")
+    return render_template("error.html")
 
 #@app.route("/playlist_input", methods=["POST","GET"])
 #def playlist_input():

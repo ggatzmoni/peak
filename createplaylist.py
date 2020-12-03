@@ -102,7 +102,7 @@ def add_items_to_playlist(genre, decade, popularity, length, playlist_name, play
 ## populate playlist with recommended tracks
     tracks_id = get_tracks_id(genre, decade, popularity, length)
     track_uris = [create_spotify_uri2(track) for track in tracks_id]
-    playlist_id = get_playlist_id(playlist_name)
+    #playlist_id = get_playlist_id(playlist_name)
     response = requests.post(
         url=f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks",
         data = json.dumps(track_uris),
