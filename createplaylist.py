@@ -35,15 +35,15 @@ def get_data():
     return df_kaggle
 
 #filter data
-def filter_data(genre, decade, popularity, length):
+def filter_data(genre, decade, length, popularity):
     df_kaggle = get_data()
     filtered_results = df_kaggle[(df_kaggle['genres'].str.contains(str.lower(genre))) & (df_kaggle['decades'] == decade) & (df_kaggle['popularity_binned'] == popularity)]
     if sum(filtered_results['duration_min'].cumsum()) < float(length):
         return False
     return filtered_results
 
-def get_seed(genre, decade, popularity, length):
-    filtered_results = filter_data(genre, decade, popularity, length)
+def get_seed(genre, decade, length, popularity):
+    filtered_results = filter_data(genre, decade, length, popularity)
     if genre == "Classical":
         seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f"'{genre}',"))]
     else:
@@ -55,27 +55,27 @@ def get_seed(genre, decade, popularity, length):
     energy = seed['energy'].iat[0]
     return seed, tempo, loudness, da, energy
 
-def fit_model(genre, decade, popularity, length):
-    filtered_results = filter_data(genre, decade, popularity, length)
+def fit_model(genre, decade, length, popularity):
+    filtered_results = filter_data(genre, decade, length, popularity)
     features_names = ['scaled_tempo', 'scaled_loudness', 'danceability', 'energy'] # 'scaled_year', 'popularity_binned'
     X = filtered_results[features_names]
     y = filtered_results['track_id']
     model = KNeighborsRegressor(algorithm='kd_tree', n_jobs=-1).fit(X, y)
     return model
 
-def train_model(genre, decade, popularity, length):
+def train_model(genre, decade, length, popularity):
     # get trained model output for k: distances & indices
-    model = fit_model(genre,decade,popularity, length)
-    seed, tempo, loudness, da, energy = get_seed(genre,decade,popularity, length)
-    filtered_results = filter_data(genre, decade, popularity, length)
+    model = fit_model(genre, decade, length, popularity)
+    seed, tempo, loudness, da, energy = get_seed(genre, decade, length, popularity)
+    filtered_results = filter_data(genre, decade, length, popularity)
     knn_out, k = [], (len(filtered_results) if len(filtered_results)<100 else 100)
     knn_out = model.kneighbors([[tempo,loudness,da,energy]], n_neighbors=k)
     ind = knn_out[1][0].tolist() # get indices
     recs = filtered_results.iloc[ind] # recommendations df
     return recs
 
-def filter_sort(genre, decade, popularity, length):
-    filtered_results2 = train_model(genre, decade, popularity, length)
+def filter_sort(genre, decade, length, popularity):
+    filtered_results2 = train_model(genre, decade, length, popularity)
     filtered_duration = filtered_results2[filtered_results2['duration_min'].cumsum() <= int(length)]
     recommended_playlist = filtered_duration.reset_index(drop=True)
     recommended_playlist.sort_values(by=['scaled_tempo'])
@@ -88,8 +88,8 @@ def filter_sort(genre, decade, popularity, length):
     recommended_tracks = sorted_playlist[['track_name','track_id','artists']]
     return recommended_tracks
 
-def get_tracks_id(genre, decade, popularity,length):
-    sorted_playlist = filter_sort(genre, decade, popularity,length)
+def get_tracks_id(genre, decade, length, popularity):
+    sorted_playlist = filter_sort(genre, decade, length, popularity)
     tracks_id = sorted_playlist['track_id'].tolist()
     return tracks_id
 
@@ -98,9 +98,9 @@ def get_playlist_id(playlist_name):
     #playlist_id = playlist.playlist_id
     return playlist_id
 
-def add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id):
+def add_items_to_playlist(genre, decade, length, popularity, playlist_name, playlist_id):
 ## populate playlist with recommended tracks
-    tracks_id = get_tracks_id(genre, decade, popularity, length)
+    tracks_id = get_tracks_id(genre, decade, length, popularity)
     track_uris = [create_spotify_uri2(track) for track in tracks_id]
     #playlist_id = get_playlist_id(playlist_name)
     response = requests.post(

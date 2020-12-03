@@ -91,11 +91,11 @@ def algo_input():
         req = request.form
         genre, decade, length, popularity, playlist_name = req.values()
         #specify function to input front-end and return html page
-        if filter_data(genre, decade, popularity, length) is False:
+        if filter_data(genre, decade, length, popularity) is False:
             return redirect("/error")
         playlist_id = get_playlist_id(playlist_name)
         #session['playlist_id_widget'] = playlist_id[0:21]
-        add_items_to_playlist(genre, decade, popularity, length, playlist_name, playlist_id)
+        add_items_to_playlist(genre, decade, length, popularity, playlist_name, playlist_id)
         #session['genre'] = 'rock'
         return render_template('page_player.html', length=length, genre=genre, decade=decade, popularity=popularity, playlist_name=playlist_name)#, playlist_id=playlist_id)#, playlist_id_widget=playlist_id_widget)  #redirect('/algo_running'
 
