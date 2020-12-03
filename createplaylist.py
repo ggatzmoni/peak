@@ -44,20 +44,22 @@ def filter_data(genre, decade, length, popularity):
 
 def get_seed(genre, decade, length, popularity):
     filtered_results = filter_data(genre, decade, length, popularity)
-    if genre == "Classical" or genre == "Techno":
+    if genre == "Techno":
+         seed = filtered_results.sample(1)
+    elif genre =="Classical":
         seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f"'{genre}',"))]
+        seed = seeds.sample(1)
     else:
         seeds = filtered_results[filtered_results['genres'].str.contains(str.lower(f", {genre},"))]
-    seed = seeds.sample(1)
+        seed = seeds.sample(1)
     tempo = seed['scaled_tempo'].iat[0]
-    loudness = seed['scaled_loudness'].iat[0]
     da = seed['danceability'].iat[0]
     energy = seed['energy'].iat[0]
-    return seed, tempo, loudness, da, energy
+    return seed, tempo, da, energy
 
 def fit_model(genre, decade, length, popularity):
     filtered_results = filter_data(genre, decade, length, popularity)
-    features_names = ['scaled_tempo', 'scaled_loudness', 'danceability', 'energy'] # 'scaled_year', 'popularity_binned'
+    features_names = ['scaled_tempo', 'danceability', 'energy'] # 'scaled_year', 'popularity_binned'
     X = filtered_results[features_names]
     y = filtered_results['track_id']
     model = KNeighborsRegressor(algorithm='kd_tree', n_jobs=-1).fit(X, y)
@@ -66,10 +68,10 @@ def fit_model(genre, decade, length, popularity):
 def train_model(genre, decade, length, popularity):
     # get trained model output for k: distances & indices
     model = fit_model(genre, decade, length, popularity)
-    seed, tempo, loudness, da, energy = get_seed(genre, decade, length, popularity)
+    seed, tempo, da, energy = get_seed(genre, decade, length, popularity)
     filtered_results = filter_data(genre, decade, length, popularity)
     knn_out, k = [], (len(filtered_results) if len(filtered_results)<100 else 100)
-    knn_out = model.kneighbors([[tempo,loudness,da,energy]], n_neighbors=k)
+    knn_out = model.kneighbors([[tempo,da,energy]], n_neighbors=k)
     ind = knn_out[1][0].tolist() # get indices
     recs = filtered_results.iloc[ind] # recommendations df
     return recs
