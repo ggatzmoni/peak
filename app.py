@@ -48,7 +48,6 @@ app.secret_key = "qsdfghjklm"
 #def player():
     #if request.main == 'POST':
         #msg = request.form.get('msg')
-        #print(msg)
     #return render_template("player.html", main=main)
 
 #@app.route("/v1")

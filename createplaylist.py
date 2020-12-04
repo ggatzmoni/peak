@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import KNeighborsRegressor
-#Importing stuffs for authentication with Spotify API
 from dotenv import load_dotenv
 import os
 load_dotenv()
