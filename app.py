@@ -116,7 +116,7 @@ def algo_input():
         session['popularity'] = popularity
         session['playlist_name'] = playlist_name
         add_items_to_playlist(genre, decade, length, popularity, playlist_name, playlist_id)
-        return redirect("/page_player")
+        return redirect("/page_player_pres")
 
     return render_template("error.html")
 
