@@ -62,6 +62,16 @@ def algo():
 def playlist():
     return render_template("playlist.html")
 
+@app.route("/page_player_pres", methods=["POST","GET"])
+def playlist_pres():
+    widget = session.get('playlist_id_widget')
+    genre = session.get('genre')
+    decade = session.get('decade')
+    length = session.get('length')
+    popularity = session.get('popularity')
+    playlist_name = session.get('playlist_name')
+    return render_template("page_player_pres.html", widget=widget, genre=genre, decade=decade, length=length, popularity=popularity, playlist_name=playlist_name)
+
 @app.route("/page_player", methods=["POST","GET"])
 def page_player():
     widget = session.get('playlist_id_widget')
