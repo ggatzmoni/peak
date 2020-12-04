@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: hsl(0, 0%, 4%);margin: 0; height: 100%; overflow: hidden">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,58 +11,55 @@
 </head>
 
 <style>
+.image-select {
+  max-width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 30px;
 
-.message-select {
-  height: 50%;
-  width: 50%;
 }
 
-.has-background-select {
-    background-image: url(static/background_grain.jpeg);
+.card-heading {
+  color: rgb(248, 247, 222);
+  font-family: Helvetica;
+  font-weight: bold;
 }
 
-.button {
-  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
-}
-
-.input {
-box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px rgb(230, 231, 125), 0 0 0 8px rgb(42, 198, 185) ,0 0 0 10px rgb(101, 43, 117);
+.card-subheading {
+  color: rgb(248, 247, 222);
+  font-weight: lighter;
+  font-family: Helvetica;
 }
 </style>
 
 <body>
-    <section class = "hero is-medium has-background-select">
-      <div class="hero-body is-right">
-        <figure class="image right">
-          <img src="static/peaklogo.png" sty@le="top: 560px;">
+    <section class = "hero is-medium has-background-black">
+      <div class="hero-body is-right has-background-black">
+        <figure class="image-select right has-background-black">
+          <a href="https://peak-music.herokuapp.com/" target="_blank">
+            <img src="static/peaklogo_2.png">
+          </a>
         </figure>
+      <h3 class="card-heading has-text-centered" >Oops.. something went wrong!</h3>
+      <h2 class="card-subheading has-text-centered">Our dataset is not big enough to handle your request.. we're working on it</h2>
+      <h2 class="card-heading has-text-centered">Click on the logo to redirect to the homepage</h2>
       </div>
     </section>
-
-  <article class="message">
-    <div class="message-header">
-    <form action="/" method="POST">
-        <textarea type="text" name="msg"></textarea>
-        <label>Messege</label>
-        <button type="submit" class="button buttonBlue">
-        Submit
-        </button>
-      </form>
 </body>
 
-<!-- .hero -->
 <section class="hero-foot">
-  <section class="section has-background-select">
+  <section class="section has-background-black">
+    </section>
       <div>
-        <div class="content has-text-right has-text-white is-2" style="margin-top: -50px">
-          <a href="https://www.lewagon.com" target="_blank">
-            <img src="static/logo_lewagon_red.png"  style="margin-top: -50px" alt="" width=20>
-            <img src="static/lewagon_white.png"  style="margin-top: -50px" alt="" width=60>
-          </a>
+        <div class="content has-text-right has-text-white is-3" style="margin-top: -120px">
+            <a href="https://www.lewagon.com" target="_blank">
+              <img src="static/logo_lewagon_red.png"  style="margin-top: -120px" alt="" width=20>
+              <img src="static/lewagon_white.png"  style="margin-top: -120px; padding-right: 20px" alt="" width=60>
+            </a>
         </div>
       </div>
-    </section>
   </section>
+</html>
 
 
 

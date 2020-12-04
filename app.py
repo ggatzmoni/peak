@@ -74,7 +74,7 @@ def page_player():
 
 @app.route("/error", methods=["POST","GET"])
 def error():
-    return render_template("experiment.html")
+    return render_template("error.html")
 
 #@app.route("/algo_running", methods=["POST","GET"])
 #def algo_running():
