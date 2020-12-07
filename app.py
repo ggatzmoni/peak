@@ -26,41 +26,8 @@ from spotifyclient import *
 '''instance flask web application'''
 app = Flask(__name__)
 app.secret_key = "qsdfghjklm"
-#app.config["SECRET_KEY"] = "qsdfghjklm"
 
 '''define pages on app'''
-# access to page via function decorater - start page
-#@app.route("/")
-# home-app with inline html
-#def home():
-    #return render_template("index.html")
-
-# acces to page via parameter
-#@app.route("/<name>")
-#speficy different pages via f string
-#def user(name):
-    #return render_template("v1")
-
-#redirect to home when on admin page
-
-#create player page
-#@app.route("/player", methods=['POST','GET'])
-#def player():
-    #if request.main == 'POST':
-        #msg = request.form.get('msg')
-    #return render_template("player.html", main=main)
-
-#@app.route("/v1")
-#def v1():
-    #return render_template("v1.html")
-
-@app.route("/algo_running", methods=["POST","GET"])
-def algo():
-    return render_template("algo_running.html")
-
-@app.route("/playlist", methods=["POST","GET"])
-def playlist():
-    return render_template("playlist.html")
 
 @app.route("/page_player_pres", methods=["POST","GET"])
 def playlist_pres():
@@ -86,9 +53,6 @@ def page_player():
 def error():
     return render_template("error.html")
 
-#@app.route("/algo_running", methods=["POST","GET"])
-#def algo_running():
-    #return render_template("algo_running.html", length=length, genre=genre, decade=decade, popularity=popularity)
 
 @app.route("/", methods=["POST","GET"])
 def center():
@@ -116,19 +80,10 @@ def algo_input():
         session['popularity'] = popularity
         session['playlist_name'] = playlist_name
         add_items_to_playlist(genre, decade, length, popularity, playlist_name, playlist_id)
-        return redirect("/page_player_pres")
+        return redirect("/page_player")
 
     return render_template("error.html")
 
-#@app.route("/playlist_input", methods=["POST","GET"])
-#def playlist_input():
-    #if request.method == "POST":
-        #playlist_req = request.form['playlist_name']
-        #playlist_id = get_playlist_id(playlist_req)
-        #spoti = add_items_to_playlist(genre, decade, popularity, length, playlist_req, playlist_id)
-        #print(spoti)
-        #return render_template('page_player.html', playlist_name=playlist_name)
-    #return redirect("/error")
 
 '''run app'''
 if __name__ == "__main__":
