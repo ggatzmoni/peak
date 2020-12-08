@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html style="background-color: hsl(0, 0%, 4%);margin: 0; height: 100%; overflow: hidden">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Peak - home</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <link rel="stylesheet" href="styles/debug.css">
+  </head>
+
+  <style>
+
+
+  .custom-select1 {
+  font-family: Helvetica;
+  font-size: 12px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(248, 150, 61);
+  background-color: rgb(248, 150, 61);
+  box-shadow: 0 0 0 2px rgb(248, 150, 61), 0 0 0 4px rgb(248, 150, 61), 0 0 0 6px hsl(0, 0%, 4%), 0 0 0 8px hsl(0, 0%, 4%) ,0 0 0 10px hsl(0, 0%, 4%);
+  text-align-last:center;
+  width:100%;
+
+}
+
+  .custom-select2 {
+  font-family: Helvetica;
+  font-size: 12px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(241, 31, 80);
+  background-color: rgb(241, 31, 80);
+  box-shadow: 0 0 0 2px rgb(241, 31, 80), 0 0 0 4px rgb(241, 31, 80), 0 0 0 6px hsl(0, 0%, 4%), 0 0 0 8px hsl(0, 0%, 4%) ,0 0 0 10px hsl(0, 0%, 4%);
+  text-align-last:center;
+  width:100%;
+
+}
+
+  .custom-select3 {
+  font-family: Helvetica;
+  font-size: 12px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(230, 231, 125);
+  background-color: rgb(230, 231, 125);
+  box-shadow: 0 0 0 2px rgb(230, 231, 125), 0 0 0 4px rgb(230, 231, 125), 0 0 0 6px hsl(0, 0%, 4%), 0 0 0 8px hsl(0, 0%, 4%) ,0 0 0 10px hsl(0, 0%, 4%);
+  text-align-last:center;
+  width:100%;
+
+}
+
+  .custom-select4 {
+  font-family: Helvetica;
+  font-size: 12px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(42, 198, 185);
+  background-color: rgb(42, 198, 185);
+  box-shadow: 0 0 0 2px rgb(42, 198, 185), 0 0 0 4px rgb(42, 198, 185), 0 0 0 6px hsl(0, 0%, 4%), 0 0 0 8px hsl(0, 0%, 4%) ,0 0 0 10px hsl(0, 0%, 4%);
+  text-align-last:center;
+  width:100%;
+
+}
+
+ .input-select {
+  font-family: Helvetica;
+  font-size: 12px;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(101, 43, 117);
+  background-color: rgb(101, 43, 117);
+  box-shadow: 0 0 0 2px rgb(101, 43, 117), 0 0 0 4px rgb(101, 43, 117), 0 0 0 6px hsl(0, 0%, 4%), 0 0 0 8px hsl(0, 0%, 4%) ,0 0 0 10px hsl(0, 0%, 4%);
+  text-align-last:center
+  width:100%;
+
+}
+
+.body { 
+  background-color: black; 
+  width:100%;
+  height: 300vh; }
+
+  .custom-button {
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 6.5px;
+  border-radius: 4px;
+  border-style: double;
+  border-width: 2px;
+  border-color: rgb(248, 247, 222);
+  background-color: rgb(248, 247, 222);
+  box-shadow: 0 0 0 2px rgb(248, 247, 222), 0 0 0 4px rgb(248, 247, 222), 0 0 0 6px hsl(0, 0%, 4%), 0 0 0 8px hsl(0, 0%, 4%) ,0 0 0 10px hsl(0, 0%, 4%);
+  text-align-last:center;
+  text-align-last:center;
+  width:100%;
+
+}
+
+
+.image-select {
+  max-width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 30px
+  width:100%;
+
+}
+
+.card-heading {
+  color: rgb(248, 247, 222);
+  font-family: Helvetica;
+  font-weight: bold;
+  width:100%;
+}
+
+.card-subheading {
+  color: rgb(248, 247, 222);
+  font-weight: lighter;
+  font-family: Helvetica;
+  width:100%;
+}
+
+.columns {
+  width: 100%;
+}
+
+</style>
+
+<body>
+    <section class = "hero is-medium has-background-black">
+      <div class="hero-body is-right has-background-black">
+        <figure class="image-select right has-background-black">
+          <img src="static/peaklogo_2.png" >
+        </figure>
+      <h3 class="card-heading has-text-centered" >Gain control over your music recommendations and get the DJ-set experience</h3>
+      <h2 class="card-subheading has-text-centered">What are you in the mood for ? &emsp;&emsp; How much time do you have ?</h2>
+      <h2 class="card-heading has-text-centered">Choose below!</h2>
+      </div>
+    </section>
+</body>
+
+    <!-- .section -->
+<section class="hero-foot">
+  <section class="section has-background-black">
+    <form action="/algo_input" method="POST">
+      <div class="container has-text-centered">
+        <div class="columns is-vcentered is-12">
+          <div class="dropdown is-active column is-2" style="margin-top: -210px">
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+              <select class="custom-select1 is-medium has-text-black" name="genre" id="genre-select">
+                <div class="dropdown-content">
+                  <option value="" disabled selected>Mood</option>
+                {% for genre in genres %}
+                  <option {{genre}}>{{genre.capitalize()}}</option>
+                {% endfor %}
+                </div>
+              </select>
+            </div>
+          </div>
+          <div class="dropdown is-active column is-2" style="margin-top: -210px">
+           <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+              <select class="custom-select2 is-medium has-text-black" name="decade" id="decade-select">
+                <div class="dropdown-content">
+                  <option value="" disabled selected>Decade</option>
+                {% for decade in decades %}
+                  <option value="{{decade}}">{{decade.capitalize()}}</option>
+                {% endfor %}
+                </div>
+              </select>
+            </div>
+          </div>
+          <div class="dropdown is-active column is-2" style="margin-top: -210px">
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+              <select class="custom-select3 is-medium has-text-black" name="length" id="length-select">
+                <div class="dropdown-content">
+                  <option value="" disabled selected>Time</option>
+                {% for length in lengths %}
+                  <option value="{{length}}">{{length.capitalize()}}</option>
+                {% endfor %}
+                </div>
+              </select>
+            </div>
+          </div>
+          <div class="dropdown is-active column is-2" style="margin-top: -210px">
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+              <select class="custom-select4 is-medium has-text-black is-rounded" name="popularity" id="popularity-select">
+                <div class="dropdown-content">
+                  <option value="" disabled selected>Popularity</option>
+                {% for popularity in popularities %}
+                  <option value="{{popularity}}">{{popularity.capitalize()}}</option>
+                {% endfor %}
+                </div>
+              </select>
+            </div>
+          </div>
+          <div class="field is-active column is-2 is-black" style="margin-top: -135px">
+              <input class="input-select has-text-centered has-text-black" type="text" placeholder="Name it" name="playlist_name">
+          </div>
+          <div class="column is-active is-active is-2" style="margin-top: -145px">
+            <input class="custom-button is-normal has-text-black is-outlined" type="submit" value="Create it">
+          </div>
+        </div>
+      </div>
+    </form>
+    </section>
+      <div>
+        <div class="content has-text-right has-text-white is-3" style="margin-top: -90px; width:100%">
+            <a href="https://www.lewagon.com" target="_blank">
+              <img src="static/logo_lewagon_red.png"  style="margin-top: -90px width:100%" alt="" width=20>
+              <img src="static/lewagon_white.png"  style="margin-top: -90px; padding-right: 20px width:100%" alt="" width=60>
+            </a>
+          </p>
+        </div>
+      </div>
+  </section>
